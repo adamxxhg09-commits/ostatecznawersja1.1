@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="pl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arc Pro Szkolenia | Profesjonalne Szkolenia Techniczne</title>
+    <meta name="description" content="Odkryj profesjonalne kursy zawodowe w Arc Pro. Szkolenia spawalnicze (TIG, MIG, MAG), wózki widłowe, podesty ruchome UDT oraz kursy pierwszej pomocy i PPOŻ. Zdobądź certyfikaty i uprawnienia.">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0f172a',
+                            darker: '#0b1329',
+                            orange: '#f97316',
+                            blue: '#0ea5e9',
+                            gray: '#1e293b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 5px;
+            border: 2px solid #0f172a;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f97316;
+        }
+        .smooth-scroll-x {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+    </style>
+</head>
+<body class="bg-brand-dark text-slate-200 font-sans antialiased overflow-x-hidden">
+
+    <!-- STICKY HEADER -->
+    <header class="sticky top-0 z-50 bg-brand-darker/90 backdrop-blur-md border-b border-brand-gray/50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo with Link to Top -->
+                <button onclick="navigateToView('main-landing', '#start')" class="flex items-center gap-3 group transition-opacity hover:opacity-90 text-left">
+                    <div class="w-10 h-10 bg-gradient-to-tr from-brand-orange to-amber-500 rounded-lg flex items-center justify-center text-white font-display font-extrabold text-xl shadow-lg shadow-brand-orange/20">
+                        AP
+                    </div>
+                    <div>
+                        <span class="block font-display font-extrabold text-lg text-white tracking-tight leading-none">ARC PRO</span>
+                        <span class="text-xs font-semibold text-brand-orange tracking-widest uppercase data-lang" data-i18n="nav_sub">SZKOLENIA</span>
+                    </div>
+                </button>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden xl:flex items-center gap-4 xl:gap-5 text-xs xl:text-sm">
+                    <button onclick="navigateToView('main-landing', '#start')" class="text-slate-300 hover:text-brand-orange font-medium transition-colors data-lang" data-i18n="nav_start">Start</button>
+                    <button onclick="navigateToView('main-landing', '#kursy-sekcja')" class="text-slate-300 hover:text-brand-orange font-medium transition-colors data-lang" data-i18n="nav_oferta">Oferta Szkoleń</button>
+                    <button onclick="navigateToView('main-landing', '#terminy')" class="text-slate-300 hover:text-brand-orange font-medium transition-colors data-lang" data-i18n="nav_terminy">Terminy</button>
+                    <button onclick="navigateToView('main-landing', '#cennik')" class="text-slate-300 hover:text-brand-orange font-medium transition-colors data-lang" data-i18n="nav_cennik">Cennik</button>
+                    <button onclick="navigateToView('faq-page')" class="text-slate-300 hover:text-brand-orange font-medium transition-colors flex items-center gap-1 font-bold text-brand-blue"><span class="data-lang" data-i18n="nav_faq">FAQ & Asystent AI</span> <span class="w-2 h-2 rounded-full bg-brand-blue animate-pulse"></span></button>
+                    <button onclick="navigateToView('main-landing', '#kontakt')" class="text-slate-300 hover:text-brand-orange font-medium transition-colors data-lang" data-i18n="nav_kontakt">Kontakt</button>
+                </nav>
+
+                <!-- CTA Button -->
+                <div class="hidden md:flex items-center">
+                    <button onclick="navigateToView('main-landing', '#zapisz-sie')" class="bg-gradient-to-r from-brand-orange to-amber-500 text-white font-semibold px-5 py-2 rounded-lg text-xs xl:text-sm transition-all shadow-lg shadow-brand-orange/20 data-lang" data-i18n="btn_header_cta">Zapisz się na kurs</button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="xl:hidden">
+                    <button id="mobile-menu-btn" class="text-slate-300 hover:text-white focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden xl:hidden bg-brand-darker border-b border-brand-gray px-4 pt-2 pb-6 space-y-3">
+            <button onclick="navigateToView('main-landing', '#start')" class="block w-full text-left text-slate-300 hover:text-brand-orange font-medium py-2 data-lang" data-i18n="nav_start">Start</button>
+            <button onclick="navigateToView('main-landing', '#kursy-sekcja')" class="block w-full text-left text-slate-300 hover:text-brand-orange font-medium py-2 data-lang" data-i18n="nav_oferta">Oferta Szkoleń</button>
+            <button onclick="navigateToView('main-landing', '#terminy')" class="block w-full text-left text-slate-300 hover:text-brand-orange font-medium py-2 data-lang" data-i18n="nav_terminy">Terminy</button>
+            <button onclick="navigateToView('main-landing', '#cennik')" class="block w-full text-left text-slate-300 hover:text-brand-orange font-medium py-2 data-lang" data-i18n="nav_cennik">Cennik</button>
+            <button onclick="navigateToView('faq-page')" class="block w-full text-left text-brand-blue hover:text-brand-orange font-medium py-2 data-lang" data-i18n="nav_faq">FAQ & Asystent AI</button>
+            <button onclick="navigateToView('main-landing', '#kontakt')" class="block w-full text-left text-slate-300 hover:text-brand-orange font-medium py-2 data-lang" data-i18n="nav_kontakt">Kontakt</button>
+            <button onclick="navigateToView('main-landing', '#zapisz-sie')" class="block text-center bg-brand-orange text-white font-semibold py-3 rounded-lg w-full data-lang" data-i18n="btn_header_cta">Zapisz się na kurs</button>
+        </div>
+    </header>
+
+    <!-- MAIN LANDING VIEW CONTAINER -->
+    <div id="main-landing-view" class="view-container">
+
+        <!-- HERO SECTION -->
+        <section id="start" class="relative min-h-[calc(100vh-80px)] flex items-center py-10 lg:py-24 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+                <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                    <div class="lg:col-span-6 space-y-6 text-center lg:text-left">
+                        
+                        <!-- Clean Language Selector Toggle Component -->
+                        <div class="flex items-center bg-brand-gray border border-slate-700 p-1 rounded-full text-xs font-bold shadow-xl w-max mx-auto lg:mx-0 select-none">
+                            <button class="lang-btn-node pl-btn-node px-3 py-1 rounded-full text-brand-orange font-bold transition-all" onclick="changeLanguage('pl')">PL</button>
+                            <button class="lang-btn-node en-btn-node px-3 py-1 rounded-full text-slate-400 transition-all" onclick="changeLanguage('en')">EN</button>
+                            <button class="lang-btn-node uk-btn-node px-3 py-1 rounded-full text-slate-400 transition-all" onclick="changeLanguage('uk')">UA</button>
+                        </div>
+
+                        <div class="inline-flex items-center gap-2 bg-brand-orange/10 border border-brand-orange/30 px-3 py-1.5 rounded-full text-brand-orange text-xs font-semibold uppercase tracking-wider mx-auto lg:mx-0">
+                            <span class="w-2 h-2 rounded-full bg-brand-orange animate-pulse"></span>
+                            <span class="data-lang" data-i18n="hero_badge">Uprawnienia Państwowe i Certyfikaty</span>
+                        </div>
+
+                        <h1 class="font-display font-extrabold text-3xl sm:text-5xl lg:text-6xl text-white tracking-tight leading-tight sm:leading-none">
+                            <span class="data-lang" data-i18n="hero_title_1">Szkolenia Techniczne</span><br class="hidden sm:inline">
+                            <span class="bg-gradient-to-r from-brand-orange to-amber-500 bg-clip-text text-transparent">Arc Pro!</span>
+                        </h1>
+                        <p class="text-slate-400 text-sm sm:text-lg lg:text-xl max-w-xl mx-auto lg:mx-0 leading-relaxed data-lang" data-i18n="hero_desc">
+                            Odkryj profesjonalne kursy zawodowe. Zdobądź praktyczne umiejętności, uprawnienia i nowoczesną wiedzę pod okiem ekspertów. Elastyczna oferta dla firm oraz klientów indywidualnych.
+                        </p>
+                        
+                        <!-- INTERACTIVE HERO ICONS -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 py-2 text-left max-w-md sm:max-w-none mx-auto">
+                            <button onclick="filterCoursesMultiple(['tig', 'mig', 'mag'])" class="flex items-start gap-3 bg-brand-gray/20 p-3 rounded-xl border border-brand-gray/40 text-left w-full transition-all hover:opacity-80 active:scale-98">
+                                <span class="flex-shrink-0 w-8 h-8 rounded-lg bg-brand-orange/10 flex items-center justify-center text-brand-orange"><i class="fa-solid fa-fire-burner"></i></span>
+                                <div>
+                                    <h4 class="text-white font-semibold text-sm data-lang" data-i18n="f1_title">Spawanie TIG / MIG / MAG</h4>
+                                    <p class="text-slate-400 text-xs data-lang" data-i18n="f1_desc">Praktyczna nauka od podstaw</p>
+                                </div>
+                            </button>
+                            <button onclick="filterCoursesMultiple(['wozki', 'podesty'])" class="flex items-start gap-3 bg-brand-gray/20 p-3 rounded-xl border border-brand-gray/40 text-left w-full transition-all hover:opacity-80 active:scale-98">
+                                <span class="flex-shrink-0 w-8 h-8 rounded-lg bg-brand-blue/10 flex items-center justify-center text-brand-blue"><i class="fa-solid fa-up-long"></i></span>
+                                <div>
+                                    <h4 class="text-white font-semibold text-sm data-lang" data-i18n="f2_title">Wózki Widłowe & Podesty UDT</h4>
+                                    <p class="text-slate-400 text-xs data-lang" data-i18n="f2_desc">Pełne uprawnienia państwowe</p>
+                                </div>
+                            </button>
+                            <button onclick="navigateToView('main-landing', '#pierwsza-pomoc-sekcja')" class="flex items-start gap-3 bg-brand-gray/20 p-3 rounded-xl border border-brand-gray/40 text-left w-full transition-all hover:opacity-80 active:scale-98">
+                                <span class="flex-shrink-0 w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400"><i class="fa-solid fa-kit-medical"></i></span>
+                                <div>
+                                    <h4 class="text-white font-semibold text-sm data-lang" data-i18n="f3_title">Pierwsza Pomoc</h4>
+                                    <p class="text-slate-400 text-xs data-lang" data-i18n="f3_desc">Praktyczne algorytmy RKO i AED</p>
+                                </div>
+                            </button>
+                            <button onclick="navigateToView('main-landing', '#ppoz-sekcja')" class="flex items-start gap-3 bg-brand-gray/20 p-3 rounded-xl border border-brand-gray/40 text-left w-full transition-all hover:opacity-80 active:scale-98">
+                                <span class="flex-shrink-0 w-8 h-8 rounded-lg bg-rose-500/10 flex items-center justify-center text-rose-400"><i class="fa-solid fa-fire-extinguisher"></i></span>
+                                <div>
+                                    <h4 class="text-white font-semibold text-sm data-lang" data-i18n="f4_title">Trening PPOŻ</h4>
+                                    <p class="text-slate-400 text-xs data-lang" data-i18n="f4_desc">Praktyczne gaszenie pożarów</p>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-6 relative order-first lg:order-last">
+                        <div class="relative mx-auto max-sm:max-w-sm sm:max-w-md lg:max-w-none group">
+                            <div class="absolute -inset-1.5 bg-gradient-to-r from-brand-orange to-brand-blue rounded-2xl opacity-30 blur"></div>
+                            <div class="relative bg-brand-dark border-4 border-brand-gray rounded-2xl overflow-hidden shadow-2xl">
+                                <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?q=80&w=800&auto=format&fit=crop" alt="Arc Pro Spawanie" class="w-full h-auto object-cover">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BACKGROUND BLOCK O NAS -->
+        <section class="py-16 bg-brand-dark border-t border-brand-gray/30">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <span class="text-brand-orange font-bold text-sm uppercase tracking-widest block font-display data-lang" data-i18n="about_tag">O NASZEJ FIRMIE</span>
+                        <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white tracking-tight data-lang" data-i18n="about_title">Kim jesteśmy i co nas wyróżnia?</h2>
+                        <p class="text-slate-400 leading-relaxed text-base data-lang" data-i18n="about_p1">
+                            <strong>Arc Pro Szkolenia</strong> to nowoczesny ośrodek szkoleniowy z wieloletnim doświadczeniem w branży przemysłowej. Specjalizujemy się w podnoszeniu kwalifikacji zawodowych pracowników w pożądanych profesjach technicznych. Nasz zespół tworzą inżynierowie spawalnictwa oraz certyfikowani instruktorzy.
+                        </p>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-brand-blue to-brand-orange rounded-2xl opacity-20 blur"></div>
+                        <img src="https://eszkoleniabhp.com/uploads/media/1719831409_2_Sta%C5%BC_a-_kursy_BHP.jpg" alt="Szkolenie zawodowe" loading="lazy" class="relative rounded-2xl w-full h-64 object-cover border border-brand-gray/80 shadow-2xl">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PEŁNA OFERTA SZKOLEŃ -->
+        <section id="kursy-sekcja" class="py-16 sm:py-24 bg-brand-darker relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
+                    <span class="text-brand-orange font-bold text-xs sm:text-sm uppercase tracking-widest block data-lang" data-i18n="w_section_tag">Profesjonalna Ścieżka Zawodowa</span>
+                    <h2 class="font-display font-extrabold text-2xl sm:text-4xl text-white tracking-tight data-lang" data-i18n="w_section_title">Kursy Zawodowe i Certyfikacja</h2>
+                    <div class="w-20 h-1 bg-brand-orange mx-auto rounded-full"></div>
+                </div>
+
+                <!-- FILTERING BAR -->
+                <div class="bg-brand-dark border border-brand-gray/60 p-4 sm:p-6 rounded-2xl mb-12 shadow-xl">
+                    <div class="flex justify-between items-center mb-6 border-b border-brand-gray/40 pb-3">
+                        <h3 class="font-display font-bold text-lg text-white tracking-wide data-lang" data-i18n="filter_title">Filtruj według kategorii</h3>
+                        <button class="text-brand-orange text-sm font-semibold flex items-center gap-2 hover:opacity-80 transition-opacity data-lang" data-i18n="filter_hide">Ukryj filtrowanie <i class="fa-solid fa-chevron-up text-[10px]"></i></button>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <button id="filter-btn-all" onclick="filterCourses('all')" class="bg-gradient-to-r from-brand-orange to-amber-500 text-white font-semibold text-xs px-4 py-2 rounded-xl transition-all shadow-md data-lang" data-i18n="f_all">Wszystkie kategorie</button>
+                        <button id="filter-btn-wozki" onclick="filterCourses('wozki')" class="bg-brand-gray border border-slate-700 hover:border-brand-orange text-slate-200 text-xs px-4 py-2 rounded-xl transition-all data-lang" data-i18n="f_wozki_merged">Wózki Widłowe</button>
+                        <button id="filter-btn-podesty" onclick="filterCourses('podesty')" class="bg-brand-gray border border-slate-700 hover:border-brand-orange text-slate-200 text-xs px-4 py-2 rounded-xl transition-all data-lang" data-i18n="f_podesty">Podesty Ruchome</button>
+                        <button id="filter-btn-mag" onclick="filterCourses('mag')" class="bg-brand-gray border border-slate-700 hover:border-brand-orange text-slate-200 text-xs px-4 py-2 rounded-xl transition-all data-lang" data-i18n="f_mag_filter">Spawanie MAG</button>
+                        <button id="filter-btn-mig" onclick="filterCourses('mig')" class="bg-brand-gray border border-slate-700 hover:border-brand-orange text-slate-200 text-xs px-4 py-2 rounded-xl transition-all data-lang" data-i18n="f_mig">Spawanie MIG</button>
+                        <button id="filter-btn-tig" onclick="filterCourses('tig')" class="bg-brand-gray border border-slate-700 hover:border-brand-orange text-slate-200 text-xs px-4 py-2 rounded-xl transition-all data-lang" data-i18n="f_tig">Spawanie TIG</button>
+                    </div>
+                </div>
+
+                <!-- CARDS GRID -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+                    
+                    <!-- WÓZKI WIDŁOWE -->
+                    <div class="bg-brand-dark border border-brand-gray rounded-2xl p-5 sm:p-6 hover:border-brand-orange/50 transition-all flex flex-col justify-between" data-type="wozki">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="w-10 h-10 rounded-xl bg-brand-orange/10 flex items-center justify-center text-brand-orange text-lg"><i class="fa-solid fa-truck-pickup"></i></span>
+                                <span class="bg-brand-orange/10 text-brand-orange text-[9px] font-bold px-2 py-0.5 rounded-full uppercase">UDT</span>
+                            </div>
+                            <h3 class="font-display font-bold text-lg text-white data-lang" data-i18n="c_w1_title">Wózki Widłowe</h3>
+                            <p class="text-slate-400 text-xs sm:text-sm leading-relaxed data-lang" data-i18n="c_w1_desc_merged">Kompleksowe szkolenia operatorskie UDT. Przygotowujemy do obsługi maszyn standardowych oraz zaawansowanych urządzeń specjalizowanych.</p>
+                            
+                            <div class="border-t border-brand-gray/40 pt-3 space-y-2">
+                                <h4 class="text-brand-orange font-semibold text-xs uppercase tracking-wider data-lang" data-i18n="c_sub_label">Zakres szkolenia:</h4>
+                                <ul class="text-xs text-slate-300 space-y-2">
+                                    <li class="bg-brand-darker p-2.5 rounded-xl border border-brand-gray/40 flex flex-col gap-0.5 text-left"><strong class="text-white data-lang" data-i18n="sub_w_std_title">Wózki standardowe</strong> <span class="text-slate-400 text-[11px] data-lang" data-i18n="sub_w_std_foot">Z wyłączeniem urządzeń specjalizowanych (wózki czołowe i boczne Reach Truck).</span></li>
+                                    <li class="bg-brand-darker p-2.5 rounded-xl border border-brand-gray/40 flex flex-col gap-0.5 text-left"><strong class="text-white data-lang" data-i18n="sub_w_spec_title">Wózki specjalizowane</strong> <span class="text-slate-400 text-[11px] data-lang" data-i18n="sub_w_spec_foot">Wózki jezdniowe z operatorem podnoszonym wraz z ładunkiem oraz ładowarki teleskopowe.</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button onclick="navigateToView('main-landing', '#zapisz-sie')" class="block text-center bg-brand-gray hover:bg-brand-orange text-white font-semibold text-xs py-3 rounded-xl transition-colors mt-6 w-full data-lang" data-i18n="btn_header_cta">Zapisz się na kurs</button>
+                    </div>
+
+                    <!-- PODESTY RUCHOME -->
+                    <div class="bg-brand-dark border border-brand-gray rounded-2xl p-5 sm:p-6 hover:border-brand-blue/50 transition-all flex flex-col justify-between" data-type="podesty">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="w-10 h-10 rounded-xl bg-brand-blue/10 flex items-center justify-center text-brand-blue text-lg"><i class="fa-solid fa-up-long"></i></span>
+                                <span class="bg-brand-blue/10 text-brand-blue text-[9px] font-bold px-2 py-0.5 rounded-full uppercase">UDT</span>
+                            </div>
+                            <h3 class="font-display font-bold text-lg text-white data-lang" data-i18n="c_w3_title">Podesty Ruchome Przejezdne</h3>
+                            <p class="text-slate-400 text-xs sm:text-sm leading-relaxed data-lang" data-i18n="c_w3_desc">Szkolenia operatorskie przygotowujące pod egzamin państwowy przed Komisją UDT. Gwarantujemy pełne przygotowanie praktyczne.</p>
+                        </div>
+                        <button onclick="navigateToView('main-landing', '#zapisz-sie')" class="block text-center bg-brand-gray hover:bg-brand-blue text-white font-semibold text-xs py-3 rounded-xl transition-colors mt-6 w-full data-lang" data-i18n="btn_header_cta">Zapisz się na kurs</button>
+                    </div>
+
+                    <!-- SPAWANIE MAG 135 -->
+                    <div class="bg-brand-dark border border-brand-gray rounded-2xl p-5 sm:p-6 hover:border-amber-500/50 transition-all flex flex-col justify-between" data-type="mag">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-500 text-lg"><i class="fa-solid fa-industry"></i></span>
+                                <span class="bg-amber-500/10 text-amber-500 text-[9px] font-bold px-2 py-0.5 rounded-full uppercase">MAG (135)</span>
+                            </div>
+                            <h3 class="font-display font-bold text-lg text-white data-lang" data-i18n="c_w4_title">Kurs Spawania MAG 135</h3>
+                            <p class="text-slate-400 text-xs sm:text-sm leading-relaxed data-lang" data-i18n="c_w4_desc">Wydajne spawanie półautomatyczne drutem topliwym w osłonie gazów aktywnych. Podstawa w konstrukcjach stalowych.</p>
+                            
+                            <div class="border-t border-brand-gray/40 pt-3 space-y-2">
+                                <h4 class="text-amber-500 font-semibold text-xs uppercase tracking-wider data-lang" data-i18n="c_materials_h">Rozbicie na materiały i poziomy:</h4>
+                                <ul class="text-xs text-slate-300 space-y-1.5 pl-1">
+                                    <li class="flex flex-col gap-0.5 bg-brand-darker p-2 rounded-lg border border-brand-gray/40"><span class="font-bold text-white data-lang" data-i18n="c_w4_mat1">Stal czarna</span> <span class="text-slate-400 font-medium text-[11px] data-lang" data-i18n="w_levels_p">Poziom 1, Poziom 2, Poziom 3</span></li>
+                                    <li class="flex flex-col gap-0.5 bg-brand-darker p-2 rounded-lg border border-brand-gray/40"><span class="font-bold text-white data-lang" data-i18n="c_w4_mat2">Stal nierdzewna</span> <span class="text-slate-400 font-medium text-[11px] data-lang" data-i18n="w_levels_p">Poziom 1, Poziom 2, Poziom 3</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button onclick="navigateToView('main-landing', '#zapisz-sie')" class="block text-center bg-brand-gray hover:bg-amber-500 text-white font-semibold text-xs py-3 rounded-xl transition-colors mt-6 w-full data-lang" data-i18n="btn_header_cta">Zapisz się na kurs</button>
+                    </div>
+
+                    <!-- SPAWANIE MIG 131 -->
+                    <div class="bg-brand-dark border border-brand-gray rounded-2xl p-5 sm:p-6 hover:border-brand-orange/50 transition-all flex flex-col justify-between" data-type="mig">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="w-10 h-10 rounded-xl bg-brand-orange/10 flex items-center justify-center text-brand-orange text-lg"><i class="fa-solid fa-sheet-plastic"></i></span>
+                                <span class="bg-brand-orange/10 text-brand-orange text-[9px] font-bold px-2 py-0.5 rounded-full uppercase">MIG (131)</span>
+                            </div>
+                            <h3 class="font-display font-bold text-lg text-white data-lang" data-i18n="c_w5_title">Kurs Spawania MIG 131</h3>
+                            <p class="text-slate-400 text-xs sm:text-sm leading-relaxed data-lang" data-i18n="c_w5_desc">Półautomatyczne łączenie metali lekkich w osłonie gazów obojętnych. Kluczowe przy obróbce stopów lekkich.</p>
+                            
+                            <div class="border-t border-brand-gray/40 pt-3 space-y-2">
+                                <h4 class="text-brand-orange font-semibold text-xs uppercase tracking-wider data-lang" data-i18n="c_materials_h">Rozbicie na materiały i poziomy:</h4>
+                                <ul class="text-xs text-slate-300 space-y-1.5 pl-1">
+                                    <li class="flex flex-col gap-0.5 bg-brand-darker p-2 rounded-lg border border-brand-gray/40"><span class="font-bold text-white data-lang" data-i18n="c_w5_mat1">Aluminium</span> <span class="text-slate-400 font-medium text-[11px] data-lang" data-i18n="w_levels_p">Poziom 1, Poziom 2, Poziom 3</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button onclick="navigateToView('main-landing', '#zapisz-sie')" class="block text-center bg-brand-gray hover:bg-brand-orange text-white font-semibold text-xs py-3 rounded-xl transition-colors mt-6 w-full data-lang" data-i18n="btn_header_cta">Zapisz się na kurs</button>
+                    </div>
+
+                    <!-- SPAWANIE TIG 141 -->
+                    <div class="bg-brand-dark border border-brand-gray rounded-2xl p-5 sm:p-6 hover:border-brand-blue/50 transition-all flex flex-col justify-between" data-type="tig">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="w-12 h-12 rounded-xl bg-brand-blue/10 flex items-center justify-center text-brand-blue text-xl"><i class="fa-solid fa-bolt"></i></span>
+                                <span class="bg-brand-blue/10 text-brand-blue text-[9px] font-bold px-2 py-0.5 rounded-full uppercase">TIG (141)</span>
+                            </div>
+                            <h3 class="font-display font-bold text-lg text-white data-lang" data-i18n="c_w6_title">Kurs Spawania TIG 141</h3>
+                            <p class="text-slate-400 text-xs sm:text-sm leading-relaxed data-lang" data-i18n="c_w6_desc">Precyzyjne spawanie nietopliwą elektrodą wolframowej. Najbardziej elitarna metoda spawalnicza na rynku.</p>
+                            
+                            <div class="border-t border-brand-gray/40 pt-3 space-y-2">
+                                <h4 class="text-brand-blue font-semibold text-xs uppercase tracking-wider data-lang" data-i18n="c_materials_h">Rozbicie na materiały i poziomy:</h4>
+                                <div class="text-xs text-slate-300 grid grid-cols-1 gap-2 pl-1">
+                                    <div class="bg-brand-darker p-2 rounded-lg border border-brand-gray/40 flex flex-col gap-0.5 text-left"><strong class="text-white data-lang" data-i18n="c_w6_mat1">Stal czarna</strong> <span class="text-slate-400 font-medium text-[11px] data-lang" data-i18n="w_levels_p">Poziom 1, Poziom 2, Poziom 3</span></div>
+                                    <div class="bg-brand-darker p-2 rounded-lg border border-brand-gray/40 flex flex-col gap-0.5 text-left"><strong class="text-white data-lang" data-i18n="c_w6_mat2">Stal nierdzewna</strong> <span class="text-slate-400 font-medium text-[11px] data-lang" data-i18n="w_levels_p">Poziom 1, Poziom 2, Poziom 3</span></div>
+                                    <div class="bg-brand-darker p-2 rounded-lg border border-brand-gray/40 flex flex-col gap-0.5 text-left"><strong class="text-white data-lang" data-i18n="c_w6_mat3">Aluminium</strong> <span class="text-slate-400 font-medium text-[11px] data-lang" data-i18n="w_levels_p">Poziom 1, Poziom 2, Poziom 3</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="navigateToView('main-landing', '#zapisz-sie')" class="block text-center bg-brand-gray hover:bg-brand-blue text-white font-semibold text-xs py-3 rounded-xl transition-colors mt-6 w-full data-lang" data-i18n="btn_header_cta">Zapisz się na kurs</button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- PIERWSZA POMOC -->
+        <section id="pierwsza-pomoc-sekcja" class="py-16 sm:py-20 bg-brand-dark">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-10 items-center">
+                    <div class="space-y-4 sm:space-y-6 text-center sm:text-left">
+                        <span class="text-emerald-400 font-bold text-xs sm:text-sm uppercase tracking-widest block font-display data-lang" data-i18n="fa_tag">Bezpieczeństwo Przedmedyczne</span>
+                        <h2 class="font-display font-extrabold text-2xl sm:text-4xl text-white tracking-tight data-lang" data-i18n="fa_title">Szkolenie z pierwszej pomocy dla pracowników</h2>
+                        <p class="text-slate-400 leading-relaxed text-sm sm:text-base data-lang" data-i18n="fa_desc">Praktyczny trening oparty na wytycznych Europejskiej Rady Resuscytacji. Kładziemy nacisk na symulowane sytuacje ratownicze w środowisku pracy.</p>
+                        <div class="pt-2">
+                            <a href="#zapisz-sie" class="bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-6 py-3 rounded-lg text-xs sm:text-sm transition-all inline-flex items-center gap-2 w-full sm:w-auto justify-center"><span class="data-lang" data-i18n="fa_btn">Zapisz się na Pierwszą Pomoc</span> <i class="fa-solid fa-heart-pulse"></i></a>
+                        </div>
+                    </div>
+                    <div class="relative max-w-md mx-auto w-full">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-brand-blue rounded-2xl opacity-30 blur"></div>
+                       <img src="https://pierwszapomoc.pl/wp-content/uploads/2023/12/Fotolia_72835966_XL-scaled.jpg" alt="Pierwsza Pomoc" loading="lazy" class="relative rounded-2xl w-full h-64 sm:h-96 object-cover border border-brand-gray/80 shadow-2xl">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- OCHRONA PPOŻ -->
+        <section id="ppoz-sekcja" class="py-16 sm:py-20 bg-brand-darker">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-10 items-center">
+                    <div class="relative order-last lg:order-first max-w-md mx-auto w-full">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-rose-500 to-brand-orange rounded-2xl opacity-30 blur"></div>
+                      <img src="https://static.wixstatic.com/media/070390_f135a910cf484c42bce3b25b9c81ee25~mv2.png/v1/fill/w_640,h_552,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/070390_f135a910cf484c42bce3b25b9c81ee25~mv2.png" alt="Szkolenie PPOŻ" loading="lazy" class="relative rounded-2xl w-full h-64 sm:h-96 object-cover border border-brand-gray/80 shadow-2xl">
+                    </div>
+                    <div class="space-y-4 sm:space-y-6 text-center sm:text-left">
+                        <span class="text-rose-500 font-bold text-xs sm:text-sm uppercase tracking-widest block font-display data-lang" data-i18n="fire_tag">Bezpieczeństwo Ogniowe</span>
+                        <h2 class="font-display font-extrabold text-2xl sm:text-4xl text-white tracking-tight data-lang" data-i18n="fire_title">Szkolenie PPOŻ dla pracowników</h2>
+                        <p class="text-slate-400 leading-relaxed text-sm sm:text-base data-lang" data-i18n="fire_desc">Program dostosowany do wymogów prawnych Kodeksu Pracy dla osób wyznaczonych do zwalczania pożarów i prowadzenia ewakuacji. Część praktyczna prowadzona jest przy użyciu trenażerów gazowych.</p>
+                        <div class="pt-2">
+                            <a href="#zapisz-sie" class="bg-rose-500 hover:bg-rose-600 text-white font-semibold px-6 py-3 rounded-lg text-xs sm:text-sm transition-all inline-flex items-center gap-2 w-full sm:w-auto justify-center"><span class="data-lang" data-i18n="fire_btn">Zapisz się na PPOŻ</span> <i class="fa-solid fa-fire-extinguisher"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TERMINY -->
+        <section id="terminy" class="py-20 lg:py-28 bg-brand-dark relative border-t border-brand-gray/30">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                    <span class="text-brand-orange font-bold text-sm uppercase tracking-widest block data-lang" data-i18n="dates_tag">Terminarz Zajęć</span>
+                    <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-white data-lang" data-i18n="dates_title">Najbliższe Wolne Terminy</h2>
+                    <div class="w-20 h-1 bg-brand-orange mx-auto rounded-full"></div>
+                </div>
+
+                <div class="space-y-3 max-w-4xl mx-auto">
+                    <div class="bg-brand-darker border border-brand-gray p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center gap-4 w-full sm:w-auto text-left">
+                            <div class="bg-brand-orange/10 text-brand-orange text-center p-2.5 rounded-xl min-w-[64px]"><span class="block text-xl font-bold">14</span><span class="text-[9px] uppercase font-bold data-lang" data-i18n="month_july">Lipiec</span></div>
+                            <div><h4 class="text-white font-bold text-sm sm:text-base data-lang" data-i18n="t_mig_course">Kurs Spawania MIG 131</h4><p class="text-slate-400 text-xs mt-0.5"><i class="fa-solid fa-location-dot text-brand-blue"></i> <span class="data-lang" data-i18n="loc_waw">Baza Warszawa</span></p></div>
+                        </div>
+                        <div class="flex items-center gap-4 justify-between sm:justify-end w-full sm:w-auto border-t sm:border-t-0 border-brand-gray/40 pt-3 sm:pt-0">
+                            <span class="bg-emerald-500/10 text-emerald-400 text-xs px-2.5 py-1 rounded-full font-semibold data-lang" data-i18n="status_open">Zapisy otwarte</span>
+                            <button onclick="navigateToView('main-landing', '#zapisz-sie')" class="bg-brand-gray hover:bg-brand-orange text-white text-xs font-semibold px-4 py-2 rounded-lg data-lang" data-i18n="btn_table_book">Zapisz się</button>
+                        </div>
+                    </div>
+                    <div class="bg-brand-darker border border-brand-gray p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center gap-4 w-full sm:w-auto text-left">
+                            <div class="bg-brand-orange/10 text-brand-orange text-center p-2.5 rounded-xl min-w-[64px]"><span class="block text-xl font-bold">16</span><span class="text-[9px] uppercase font-bold data-lang" data-i18n="month_july">Lipiec</span></div>
+                            <div><h4 class="text-white font-bold text-sm sm:text-base data-lang" data-i18n="t_mag_course">Kurs Spawania MAG 135</h4><p class="text-slate-400 text-xs mt-0.5"><i class="fa-solid fa-location-dot text-brand-blue"></i> <span class="data-lang" data-i18n="loc_waw">Baza Warszawa</span></p></div>
+                        </div>
+                        <div class="flex items-center gap-4 justify-between sm:justify-end w-full sm:w-auto border-t sm:border-t-0 border-brand-gray/40 pt-3 sm:pt-0">
+                            <span class="bg-emerald-500/10 text-emerald-400 text-xs px-2.5 py-1 rounded-full font-semibold data-lang" data-i18n="status_open">Zapisy otwarte</span>
+                            <button onclick="navigateToView('main-landing', '#zapisz-sie')" class="bg-brand-gray hover:bg-brand-orange text-white text-xs font-semibold px-4 py-2 rounded-lg data-lang" data-i18n="btn_table_book">Zapisz się</button>
+                        </div>
+                    </div>
+                    <div class="bg-brand-darker border border-brand-gray p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center gap-4 w-full sm:w-auto text-left">
+                            <div class="bg-brand-orange/10 text-brand-orange text-center p-2.5 rounded-xl min-w-[64px]"><span class="block text-xl font-bold">19</span><span class="text-[9px] uppercase font-bold data-lang" data-i18n="month_july">Lipiec</span></div>
+                            <div><h4 class="text-white font-bold text-sm sm:text-base data-lang" data-i18n="t_tig_course">Kurs Spawania TIG 141</h4><p class="text-slate-400 text-xs mt-0.5"><i class="fa-solid fa-location-dot text-brand-blue"></i> <span class="data-lang" data-i18n="loc_waw">Baza Warszawa</span></p></div>
+                        </div>
+                        <div class="flex items-center gap-4 justify-between sm:justify-end w-full sm:w-auto border-t sm:border-t-0 border-brand-gray/40 pt-3 sm:pt-0">
+                            <span class="bg-emerald-500/10 text-emerald-400 text-xs px-2.5 py-1 rounded-full font-semibold data-lang" data-i18n="status_open">Zapisy otwarte</span>
+                            <button onclick="navigateToView('main-landing', '#zapisz-sie')" class="bg-brand-gray hover:bg-brand-orange text-white text-xs font-semibold px-4 py-2 rounded-lg data-lang" data-i18n="btn_table_book">Zapisz się</button>
+                        </div>
+                    </div>
+                    <div class="bg-brand-darker border border-brand-gray p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center gap-4 w-full sm:w-auto text-left">
+                            <div class="bg-brand-blue/10 text-brand-blue text-center p-3 rounded-xl min-w-[64px]"><span class="block text-xl font-bold">21</span><span class="text-[9px] uppercase font-bold data-lang" data-i18n="month_july">Lipiec</span></div>
+                            <div><h4 class="text-white font-bold text-sm sm:text-base data-lang" data-i18n="t_w_std_course">Wózki Widłowe (Standardowe)</h4><p class="text-slate-400 text-xs mt-0.5"><i class="fa-solid fa-location-dot text-brand-blue"></i> <span class="data-lang" data-i18n="loc_log">Centrum logistyczne</span></p></div>
+                        </div>
+                        <div class="flex items-center gap-4 justify-between sm:justify-end w-full sm:w-auto border-t sm:border-t-0 border-brand-gray/40 pt-3 sm:pt-0">
+                            <span class="bg-emerald-500/10 text-emerald-400 text-xs px-2.5 py-1 rounded-full font-semibold data-lang" data-i18n="status_open">Zapisy otwarte</span>
+                            <button onclick="navigateToView('main-landing', '#zapisz-sie')" class="bg-brand-gray hover:bg-brand-orange text-white text-xs font-semibold px-4 py-2 rounded-lg data-lang" data-i18n="btn_table_book">Zapisz się</button>
+                        </div>
+                    </div>
+                    <div class="bg-brand-darker border border-brand-gray p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center gap-4 w-full sm:w-auto text-left">
+                            <div class="bg-brand-blue/10 text-brand-blue text-center p-3 rounded-xl min-w-[64px]"><span class="block text-xl font-bold">23</span><span class="text-[9px] uppercase font-bold data-lang" data-i18n="month_july">Lipiec</span></div>
+                            <div><h4 class="text-white font-bold text-sm sm:text-base data-lang" data-i18n="t_w_spec_course">Wózki Widłowe Specjalizowane</h4><p class="text-slate-400 text-xs mt-0.5"><i class="fa-solid fa-location-dot text-brand-blue"></i> <span class="data-lang" data-i18n="loc_log">Centrum logistyczne</span></p></div>
+                        </div>
+                        <div class="flex items-center gap-4 justify-between sm:justify-end w-full sm:w-auto border-t sm:border-t-0 border-brand-gray/40 pt-3 sm:pt-0">
+                            <span class="bg-emerald-500/10 text-emerald-400 text-xs px-2.5 py-1 rounded-full font-semibold data-lang" data-i18n="status_open">Zapisy otwarte</span>
+                            <button onclick="navigateToView('main-landing', '#zapisz-sie')" class="bg-brand-gray hover:bg-brand-orange text-white text-xs font-semibold px-4 py-2 rounded-lg data-lang" data-i18n="btn_table_book">Zapisz się</button>
+                        </div>
+                    </div>
+                    <div class="bg-brand-darker border border-brand-gray p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center gap-4 w-full sm:w-auto text-left">
+                            <div class="bg-brand-blue/10 text-brand-blue text-center p-2.5 rounded-xl min-w-[64px]"><span class="block text-lg font-bold">25</span><span class="text-[9px] uppercase font-bold data-lang" data-i18n="month_july">Lipiec</span></div>
+                            <div><h4 class="text-white font-bold text-sm sm:text-base data-lang" data-i18n="t_podesty_course">Podesty Ruchome Przejezdne (UDT)</h4><p class="text-slate-400 text-xs mt-0.5"><i class="fa-solid fa-location-dot text-brand-blue"></i> <span class="data-lang" data-i18n="loc_yard">Plac ćwiczeniowy</span></p></div>
+                        </div>
+                        <div class="flex items-center gap-4 justify-between sm:justify-end w-full sm:w-auto border-t sm:border-t-0 border-brand-gray/40 pt-3 sm:pt-0">
+                            <span class="bg-emerald-500/10 text-emerald-400 text-xs px-2.5 py-1 rounded-full font-semibold data-lang" data-i18n="status_open">Zapisy otwarte</span>
+                            <button onclick="navigateToView('main-landing', '#zapisz-sie')" class="bg-brand-gray hover:bg-brand-orange text-white text-xs font-semibold px-4 py-2 rounded-lg data-lang" data-i18n="btn_table_book">Zapisz się</button>
+                        </div>
+                    </div>
+                    <div class="bg-brand-darker border border-brand-gray p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center gap-4 w-full sm:w-auto text-left">
+                            <div class="bg-rose-500/10 text-rose-400 text-center p-2.5 rounded-xl min-w-[64px]"><span class="block text-lg font-bold">28</span><span class="text-[9px] uppercase font-bold data-lang" data-i18n="month_july">Lipiec</span></div>
+                            <div><h4 class="text-white font-bold text-sm sm:text-base data-lang" data-i18n="t_ppoz_course">Szkolenie PPOŻ dla pracowników</h4><p class="text-slate-400 text-xs mt-0.5"><i class="fa-solid fa-location-dot text-brand-blue"></i> <span class="data-lang" data-i18n="loc_room1">Sala szkoleniowa</span></p></div>
+                        </div>
+                        <div class="flex items-center gap-4 justify-between sm:justify-end w-full sm:w-auto border-t sm:border-t-0 border-brand-gray/40 pt-3 sm:pt-0">
+                            <span class="bg-emerald-500/10 text-emerald-400 text-xs px-2.5 py-1 rounded-full font-semibold data-lang" data-i18n="status_open">Zapisy otwarte</span>
+                            <button onclick="navigateToView('main-landing', '#zapisz-sie')" class="bg-brand-gray hover:bg-brand-orange text-white text-xs font-semibold px-4 py-2 rounded-lg data-lang" data-i18n="btn_table_book">Zapisz się</button>
+                        </div>
+                    </div>
+                    <div class="bg-brand-darker border border-brand-gray p-4 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <div class="flex items-center gap-4 w-full sm:w-auto text-left">
+                            <div class="bg-emerald-500/10 text-emerald-400 text-center p-3 rounded-xl min-w-[64px]"><span class="block text-lg font-bold">30</span><span class="text-[9px] uppercase font-bold data-lang" data-i18n="month_july">Lipiec</span></div>
+                            <div><h4 class="text-white font-bold text-sm sm:text-base data-lang" data-i18n="t_pp_course">Szkolenie z pierwszej pomocy</h4><p class="text-slate-400 text-xs mt-0.5"><i class="fa-solid fa-location-dot text-brand-blue"></i> <span class="data-lang" data-i18n="loc_room2">Sala dydaktyczna</span></p></div>
+                        </div>
+                        <div class="flex items-center gap-4 justify-between sm:justify-end w-full sm:w-auto border-t sm:border-t-0 border-brand-gray/40 pt-3 sm:pt-0">
+                            <span class="bg-emerald-500/10 text-emerald-400 text-xs px-2.5 py-1 rounded-full font-semibold data-lang" data-i18n="status_open">Zapisy otwarte</span>
+                            <button onclick="navigateToView('main-landing', '#zapisz-sie')" class="bg-brand-gray hover:bg-brand-orange text-white text-xs font-semibold px-4 py-2 rounded-lg data-lang" data-i18n="btn_table_book">Zapisz się</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CENNIK SZKOLEŃ -->
+        <section id="cennik" class="py-16 sm:py-24 bg-brand-darker relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+                    <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-white data-lang" data-i18n="prices_title">Cennik Szkoleń</h2>
+                    <div class="w-24 h-1.5 bg-brand-orange mx-auto rounded-full"></div>
+                </div>
+
+                <div class="smooth-scroll-x border border-brand-gray rounded-2xl bg-brand-dark shadow-xl">
+                    <table class="w-full text-left border-collapse min-w-[650px]">
+                        <thead>
+                            <tr class="bg-brand-gray/60 border-b border-brand-gray text-slate-200">
+                                <th class="p-4 font-semibold text-brand-orange font-display text-sm data-lang" data-i18n="tbl_c_h1">Rodzaj szkolenia</th>
+                                <th class="p-4 font-semibold text-slate-200 font-display text-sm data-lang" data-i18n="tbl_c_h2">Cena brutto</th>
+                                <th class="p-4 font-semibold text-slate-200 font-display text-sm data-lang" data-i18n="tbl_c_h3">Opłata egzaminacyjna</th>
+                                <th class="p-4 font-semibold text-slate-200 font-display text-sm data-lang" data-i18n="p_btn_label">Zapisy</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-brand-gray/40 text-xs sm:text-sm">
+                            <tr class="hover:bg-brand-gray/20 transition-colors">
+                                <td class="p-4 font-bold text-white"><span class="data-lang" data-i18n="t_tig">Kurs Spawania TIG 141 (Poziomy 1-3)</span></td>
+                                <td class="p-4 text-brand-orange font-semibold"><span class="data-lang" data-i18n="p_1900">od 1900 zł</span></td>
+                                <td class="p-4 text-slate-400 data-lang" data-i18n="fee_inc">W cenie certyfikacji</td>
+                                <td class="p-4"><button onclick="navigateToView('main-landing', '#zapisz-sie')" class="bg-brand-gray hover:bg-brand-orange text-white font-semibold text-xs px-4 py-1.5 rounded-lg transition-colors data-lang" data-i18n="p_btn">Zgłoś się</button></td>
+                            </tr>
+                            <tr class="hover:bg-brand-gray/20 transition-colors">
+                                <td class="p-4 font-bold text-white"><span class="data-lang" data-i18n="t_mig">Kurs Spawania MIG 131 (Poziomy 1-3)</span></td>
+                                <td class="p-4 text-brand-orange font-semibold"><span class="data-lang" data-i18n="p_1900">od 1900 zł</span></td>
+                                <td class="p-4 text-slate-400 data-lang" data-i18n="fee_inc">W cenie certyfikacji</td>
+                                <td class="p-4"><button onclick="navigateToView('main-landing', '#zapisz-sie')" class="bg-brand-gray hover:bg-brand-orange text-white font-semibold text-xs px-4 py-1.5 rounded-lg transition-colors data-lang" data-i18n="p_btn">Zgłoś się</button></td>
+                            </tr>
+                            <tr class="hover:bg-brand-gray/20 transition-colors">
+                                <td class="p-4 font-bold text-white"><span class="data-lang" data-i18n="t_mag">Kurs Spawania MAG 135 (Poziomy 1-3)</span></td>
+                                <td class="p-4 text-brand-orange font-semibold"><span class="data-lang" data-i18n="p_1900">od 1900 zł</span></td>
+                                <td class="p-4 text-slate-400 data-lang" data-i18n="fee_inc">W cenie certyfikacji</td>
+                                <td class="p-4"><button onclick="navigateToView('main-landing', '#zapisz-sie')" class="bg-brand-gray hover:bg-brand-orange text-white font-semibold text-xs px-4 py-1.5 rounded-lg transition-colors data-lang" data-i18n="p_btn">Zgłoś się</button></td>
+                            </tr>
+                            <tr class="hover:bg-brand-gray/20 transition-colors">
+                                <td class="p-4 font-bold text-white"><span class="data-lang" data-i18n="t_w_std">Wózki Widłowe (Standardowe Operator)</span></td>
+                                <td class="p-4 text-brand-orange font-semibold"><span class="data-lang" data-i18n="p_750">750 zł</span></td>
+                                <td class="p-4 text-brand-blue font-bold"><span class="data-lang" data-i18n="fee_udt">+250 zł (Egzamin państwowy UDT)</span></td>
+                                <td class="p-4"><button onclick="navigateToView('main-landing', '#zapisz-sie')" class="bg-brand-gray hover:bg-brand-orange text-white font-semibold text-xs px-4 py-1.5 rounded-lg transition-colors data-lang" data-i18n="p_btn">Zgłoś się</button></td>
+                            </tr>
+                            <tr class="hover:bg-brand-gray/20 transition-colors">
+                                <td class="p-4 font-bold text-white"><span class="data-lang" data-i18n="t_w_spec">Wózki Widłowe Specjalizowane</span></td>
+                                <td class="p-4 text-brand-orange font-semibold"><span class="data-lang" data-i18n="p_1100">1100 zł</span></td>
+                                <td class="p-4 text-brand-blue font-bold"><span class="data-lang" data-i18n="fee_udt">+250 zł (Egzamin państwowy UDT)</span></td>
+                                <td class="p-4"><button onclick="navigateToView('main-landing', '#zapisz-sie')" class="bg-brand-gray hover:bg-brand-orange text-white font-semibold text-xs px-4 py-1.5 rounded-lg transition-colors data-lang" data-i18n="p_btn">Zgłoś się</button></td>
+                            </tr>
+                            <tr class="hover:bg-brand-gray/20 transition-colors">
+                                <td class="p-4 font-bold text-white"><span class="data-lang" data-i18n="t_podesty">Operator podestów ruchomych przejezdnych</span></td>
+                                <td class="p-4 text-brand-orange font-semibold"><span class="data-lang" data-i18n="p_950">950 zł</span></td>
+                                <td class="p-4 text-brand-blue font-bold"><span class="data-lang" data-i18n="fee_udt">+250 zł (Egzamin państwowy UDT)</span></td>
+                                <td class="p-4"><button onclick="navigateToView('main-landing', '#zapisz-sie')" class="bg-brand-gray hover:bg-brand-orange text-white font-semibold text-xs px-4 py-1.5 rounded-lg transition-colors data-lang" data-i18n="p_btn">Zgłoś się</button></td>
+                            </tr>
+                            <tr class="hover:bg-brand-gray/20 transition-colors">
+                                <td class="p-4 font-bold text-white"><span class="data-lang" data-i18n="t_pp">Szkolenie z pierwszej pomocy dla pracowników</span></td>
+                                <td class="p-4 text-brand-orange font-semibold"><span class="data-lang" data-i18n="p_350">350 zł</span></td>
+                                <td class="p-4 text-slate-500 data-lang" data-i18n="fee_none">Brak dodatkowych opłat</td>
+                                <td class="p-4"><button onclick="navigateToView('main-landing', '#zapisz-sie')" class="bg-brand-gray hover:bg-brand-orange text-white font-semibold text-xs px-4 py-1.5 rounded-lg transition-colors data-lang" data-i18n="p_btn">Zgłoś się</button></td>
+                            </tr>
+                            <tr class="hover:bg-brand-gray/20 transition-colors">
+                                <td class="p-4 font-bold text-white"><span class="data-lang" data-i18n="t_ppoz">Szkolenie PPOŻ dla pracowników</span></td>
+                                <td class="p-4 text-brand-orange font-semibold"><span class="data-lang" data-i18n="p_400">400 zł</span></td>
+                                <td class="p-4 text-slate-500 data-lang" data-i18n="fee_none">Brak dodatkowych opłat</td>
+                                <td class="p-4"><button onclick="navigateToView('main-landing', '#zapisz-sie')" class="bg-brand-gray hover:bg-brand-orange text-white font-semibold text-xs px-4 py-1.5 rounded-lg transition-colors data-lang" data-i18n="p_btn">Zgłoś się</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SPECIFICATIONS COMPARISON TABLE -->
+        <section class="py-16 sm:py-24 relative border-t border-brand-gray/40 bg-brand-dark">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+                    <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-white data-lang" data-i18n="comp_title">Porównanie i Szczegóły Szkoleń</h2>
+                    <p class="text-slate-400 text-xs sm:text-sm data-lang" data-i18n="comp_sub">Zobacz zestawienie czasowe oraz rodzaj uzyskanych uprawnień.</p>
+                </div>
+
+                <div class="smooth-scroll-x border border-brand-gray rounded-2xl bg-brand-dark shadow-xl">
+                    <table class="w-full text-left border-collapse min-w-[600px]">
+                        <thead>
+                            <tr class="bg-brand-gray/60 border-b border-brand-gray text-slate-200">
+                                <th class="p-5 font-semibold text-brand-orange font-display text-sm data-lang" data-i18n="th1">Rodzaj szkolenia</th>
+                                <th class="p-5 font-semibold text-slate-200 font-display text-sm data-lang" data-i18n="th3">Certyfikacja i uprawnienia</th>
+                                <th class="p-5 font-semibold text-slate-200 font-display text-sm data-lang" data-i18n="th4">Ważność uprawnień</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-brand-gray/40 text-xs md:text-sm">
+                            <tr class="hover:bg-brand-gray/20 transition-colors">
+                                <td class="p-5 font-bold text-white data-lang" data-i18n="row1_c1">Kursy Spawalnicze (MIG/TIG/MAG)</td>
+                                <td class="p-5 data-lang" data-i18n="row1_c3">Książeczka Spawacza, Certyfikat Instytutu Spawalnictwa</td>
+                                <td class="p-5 text-brand-orange font-semibold data-lang" data-i18n="row1_c4">3 lata (z możliwością przedłużenia)</td>
+                            </tr>
+                            <tr class="hover:bg-brand-gray/20 transition-colors">
+                                <td class="p-5 font-bold text-white data-lang" data-i18n="row2_c1">Urządzenia UDT (Wózki / Podesty)</td>
+                                <td class="p-5 data-lang" data-i18n="row2_c3">Zaświadczenie Kwalifikacyjne UDT</td>
+                                <td class="p-5 data-lang" data-i18n="row2_c4">5 do 10 lat</td>
+                            </tr>
+                            <tr class="hover:bg-brand-gray/20 transition-colors">
+                                <td class="p-5 font-bold text-white data-lang" data-i18n="row3_c1">Szkolenia dla pracowników (Pierwsza Pomoc / PPOŻ)</td>
+                                <td class="p-5 data-lang" data-i18n="row3_c3">Certyfikat ukończenia zgodny z wymogami Kodeksu Pracy</td>
+                                <td class="p-5 font-semibold text-amber-500 data-lang" data-i18n="row3_c4">Zalecane odnowienie co 2 lata</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </div><!-- END MAIN LANDING VIEW -->
+
+    <!-- MODULAR SUBPAGE VIEW -->
+    <div id="subpage-kursy-view" class="view-container hidden min-h-[70vh] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <button onclick="navigateToView('main-landing')" class="text-brand-orange hover:text-white font-semibold flex items-center gap-2 mb-8 bg-brand-gray/40 border border-slate-700 px-4 py-2 rounded-xl transition-colors text-sm">
+            <i class="fa-solid fa-arrow-left"></i> <span class="data-lang" data-i18n="back_to_main">Powrót do strony głównej</span>
+        </button>
+        
+        <div id="dynamic-subpage-content" class="space-y-8 text-left">
+            <!-- Loaded via js layout frames -->
+        </div>
+    </div>
+
+    <!-- CENTRUM POMOCY FAQ + CZATBOT AI -->
+    <div id="faq-page-view" class="view-container hidden min-h-[80vh] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <button onclick="navigateToView('main-landing')" class="text-brand-orange hover:text-white font-semibold flex items-center gap-2 mb-8 bg-brand-gray/40 border border-slate-700 px-4 py-2 rounded-xl transition-colors text-sm">
+            <i class="fa-solid fa-arrow-left"></i> <span class="data-lang" data-i18n="back_to_main">Powrót do strony głównej</span>
+        </button>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <!-- Left Side: FAQ -->
+            <div class="lg:col-span-7 space-y-6 text-left">
+                <div class="space-y-2">
+                    <span class="text-brand-blue font-bold text-xs uppercase tracking-widest block data-lang" data-i18n="faq_tag">Centrum Pomocy</span>
+                    <h2 id="faq-heading-main" class="font-display font-extrabold text-3xl text-white tracking-tight data-lang" data-i18n="faq_title">Baza Wiedzy FAQ</h2>
+                    <div class="w-16 h-1 bg-brand-blue rounded-full"></div>
+                </div>
+
+                <div class="space-y-3 pr-2">
+                    <details class="group bg-brand-darker border border-brand-gray rounded-xl p-4 cursor-pointer transition-all hover:border-slate-600">
+                        <summary class="flex justify-between items-center font-bold text-white text-sm list-none select-none">
+                            <span class="data-lang" data-i18n="faq_q1">Czy przed kursem spawalniczym muszę mieć doświadczenie?</span>
+                            <span class="text-brand-orange transition-transform group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
+                        </summary>
+                        <p class="text-slate-400 text-xs mt-2 pt-2 border-t border-brand-gray/40 leading-relaxed data-lang" data-i18n="faq_a1">Absolutnie nie! Nasze kursy spawalnicze TIG oraz MIG są skonstruowane tak, aby uczyć od kompletnych podstaw. Ponad 80% zajęć to czysta praktyka pod okiem doświadczonych inżynierów spawalnictwa IWE.</p>
+                    </details>
+
+                    <details class="group bg-brand-darker border border-brand-gray rounded-xl p-4 cursor-pointer transition-all hover:border-slate-600">
+                        <summary class="flex justify-between items-center font-bold text-white text-sm list-none select-none">
+                            <span class="data-lang" data-i18n="faq_q2">Jak wygląda egzamin państwowy UDT na podesty?</span>
+                            <span class="text-brand-orange transition-transform group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
+                        </summary>
+                        <p class="text-slate-400 text-xs mt-2 pt-2 border-t border-brand-gray/40 leading-relaxed data-lang" data-i18n="faq_a2">Egzamin składa się z dwóch części przed komisją UDT: części teoretycznej (test wiedzy na komputerze) oraz praktycznej (obsługa maszyny i manewry na placu). Nasz program pokrywa 100% pytań egzaminacyjnych.</p>
+                    </details>
+
+                    <details class="group bg-brand-darker border border-brand-gray rounded-xl p-4 cursor-pointer transition-all hover:border-slate-600">
+                        <summary class="flex justify-between items-center font-bold text-white text-sm list-none select-none">
+                            <span class="data-lang" data-i18n="faq_q3">Czy mogę płacić za szkolenia w ratach?</span>
+                            <span class="text-brand-orange transition-transform group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
+                        </summary>
+                        <p class="text-slate-400 text-xs mt-2 pt-2 border-t border-brand-gray/40 leading-relaxed data-lang" data-i18n="faq_a3">Nie, obecnie nie ma możliwości płatności w ratach. Wszystkie opłaty za szkolenia oraz testy certyfikacyjne należy uregulować w całości przelewem lub gotówką przed oficjalnym rozpoczęciem kursu.</p>
+                    </details>
+
+                    <details class="group bg-brand-darker border border-brand-gray rounded-xl p-4 cursor-pointer transition-all hover:border-slate-600">
+                        <summary class="flex justify-between items-center font-bold text-white text-sm list-none select-none">
+                            <span class="data-lang" data-i18n="faq_q4">Czy wymagane są badania lekarskie przed rozpoczęciem kursu UDT?</span>
+                            <span class="text-brand-orange transition-transform group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
+                        </summary>
+                        <p class="text-slate-400 text-xs mt-2 pt-2 border-t border-brand-gray/40 leading-relaxed data-lang" data-i18n="faq_a4">Tak, do obsługi wózków widłowych oraz podestów ruchomych wymagane jest podstawowe orzeczenie lekarza medycyny pracy o braku przeciwwskazań zdrowotnych do obsługi urządzeń mechanicznych (w tym badania psychotechniczne).</p>
+                    </details>
+
+                    <details class="group bg-brand-darker border border-brand-gray rounded-xl p-4 cursor-pointer transition-all hover:border-slate-600">
+                        <summary class="flex justify-between items-center font-bold text-white text-sm list-none select-none">
+                            <span class="data-lang" data-i18n="faq_q5">Co dzieje się w przypadku niezdania egzaminu UDT?</span>
+                            <span class="text-brand-orange transition-transform group-open:rotate-180"><i class="fa-solid fa-chevron-down"></i></span>
+                        </summary>
+                        <p class="text-slate-400 text-xs mt-2 pt-2 border-t border-brand-gray/40 leading-relaxed data-lang" data-i18n="faq_a5">W przypadku negatywnego wyniku z części teoretycznej lub praktycznej, możliwe jest złożenie wniosku o wyznaczenie terminu poprawkowego. Wiąże się to z koniecznością ponownego wniesienia państwowej opłaty egzaminacyjnej UDT.</p>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Right Side: Live Interactive Chatbot AI Interface -->
+            <div class="lg:col-span-5 bg-brand-darker border border-brand-gray rounded-2xl shadow-2xl p-4 flex flex-col h-[400px] sm:h-[550px] relative overflow-hidden">
+                <div class="flex items-center justify-between mb-3 border-b border-brand-gray/60 pb-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-brand-blue/10 flex items-center justify-center text-brand-blue text-lg relative">
+                            <i class="fa-solid fa-robot"></i>
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 absolute bottom-0 right-0 border-2 border-brand-darker"></span>
+                        </div>
+                        <div class="text-left">
+                            <h4 id="bot-title-node" class="text-white font-bold text-sm tracking-wide data-lang" data-i18n="bot_title">Asystent AI ARC PRO</h4>
+                            <span id="bot-status-node" class="text-[10px] text-slate-400 font-medium data-lang" data-i18n="bot_status">Odpowiada natychmiast</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat history box -->
+                <div id="chat-box" class="flex-1 overflow-y-auto space-y-3 pr-1 pb-4 scrollbar-thin text-left">
+                    <div class="flex justify-start">
+                        <div id="bot-welcome-msg" class="bg-brand-gray border border-slate-700 rounded-xl px-4 py-2.5 max-w-[85%] text-xs sm:text-sm shadow-inner data-lang" data-i18n="bot_welcome">
+                            Cześć! Jestem Twoim wirtualnym asystentem. Przeanalizuję Twoje pytanie i natychmiast udzielę informacji o kursach, cenach, ratach lub egzaminach UDT. O co chcesz zapytać?
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Prompts -->
+                <div class="p-2 border-t border-brand-gray/40 bg-brand-dark/40 rounded-xl mb-2 space-y-1 text-left">
+                    <span id="bot-prompt-tip" class="block text-[10px] text-slate-500 font-semibold uppercase tracking-wider px-1 data-lang" data-i18n="bot_prompt_label">Kliknij gotowe pytanie:</span>
+                    <div class="flex flex-col gap-1">
+                        <button id="btn-prompt-1" onclick="triggerQuickChat(getBotPromptText(1))" class="bg-brand-gray hover:bg-slate-700 text-[10px] sm:text-[11px] text-slate-300 px-2.5 py-1.5 rounded-lg transition-colors border border-slate-700 text-left truncate data-lang" data-i18n="p_q1">Ile kosztuje kurs na wzwyżki?</button>
+                        <button id="btn-prompt-2" onclick="triggerQuickChat(getBotPromptText(2))" class="bg-brand-gray hover:bg-slate-700 text-[10px] sm:text-[11px] text-slate-300 px-2.5 py-1.5 rounded-lg transition-colors border border-slate-700 text-left truncate data-lang" data-i18n="p_q2">Czy można płacić w ratach?</button>
+                    </div>
+                </div>
+
+                <!-- Input box -->
+                <form id="chat-form" onsubmit="handleChatSubmit(event)" class="flex gap-2">
+                    <input type="text" id="chat-input" placeholder="Wpisz swoje pytanie tutaj..." class="flex-1 bg-brand-gray border border-slate-700 focus:border-brand-blue rounded-xl px-4 py-2.5 text-xs text-white outline-none transition-colors data-lang-placeholder" data-i18n="ph_chat">
+                    <button type="submit" class="bg-brand-blue hover:bg-sky-500 text-white w-10 h-10 flex items-center justify-center rounded-xl transition-colors shadow-lg">
+                        <i class="fa-solid fa-paper-plane text-xs"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- FORM & CONTACT SECTION -->
+    <section id="zapisz-sie" class="py-20 lg:py-28 bg-brand-darker relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch" id="kontakt">
+                
+                <div class="lg:col-span-5 flex flex-col justify-between space-y-8 text-center sm:text-left">
+                    <div class="space-y-6">
+                        <span class="text-brand-orange font-bold text-sm uppercase tracking-widest block data-lang" data-i18n="form_section_tag">Kontakt i Zapisy</span>
+                        <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white tracking-tight data-lang" data-i18n="form_section_title">Zbuduj swoją przyszłość już dziś</h2>
+                        <p class="text-slate-400 data-lang" data-i18n="form_section_desc">Masz pytania dotyczące programów szkoleń, finansowania lub wolnych terminów? Skontaktuj się bezpośrednio z naszym biurem obsługi lub wypełnij formularz zgłoszeniowy.</p>
+                    </div>
+
+                    <div class="space-y-6 max-w-sm sm:max-w-none mx-auto w-full text-left">
+                        <div class="flex items-center gap-4">
+                            <span class="w-12 h-12 bg-brand-orange/10 rounded-xl flex items-center justify-center text-brand-orange text-xl flex-shrink-0"><i class="fa-solid fa-phone"></i></span>
+                            <div>
+                                <span class="block text-xs text-slate-500 font-semibold uppercase tracking-wider data-lang" data-i18n="c_box_phone">Zadzwoń do nas</span>
+                                <a href="tel:+48500600700" class="text-white font-bold hover:text-brand-orange transition-colors">+48 500 600 700</a>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-4">
+                                <span class="w-12 h-12 bg-brand-blue/10 rounded-xl flex items-center justify-center text-brand-blue text-xl flex-shrink-0"><i class="fa-solid fa-envelope"></i></span>
+                                <div>
+                                    <span class="block text-xs text-slate-500 font-semibold uppercase tracking-wider data-lang" data-i18n="c_box_mail">Wyślij e-mail</span>
+                                    <a href="mailto:kontakt@arcproszkolenia.pl" class="text-white font-bold hover:text-brand-blue transition-colors">kontakt@arcproszkolenia.pl</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 bg-brand-dark border border-brand-gray p-5 sm:p-8 rounded-3xl relative text-left">
+                    <h3 class="font-display font-bold text-2xl text-white mb-6 data-lang" data-i18n="form_title">Formularz Zgłoszeniowy</h3>
+                    
+                    <form id="enrollment-form" class="space-y-6">
+                        <div class="grid sm:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider data-lang" data-i18n="lbl_name">Imię i Nazwisko / Nazwa Firmy</label>
+                                <input class="w-full bg-brand-gray border border-slate-700 focus:border-brand-orange rounded-xl px-4 py-3.5 text-white outline-none transition-colors data-lang-placeholder" data-i18n="ph_name" type="text" required placeholder="np. Jan Kowalski">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider data-lang" data-i18n="lbl_phone">Numer Telefonu</label>
+                                <input class="w-full bg-brand-gray border border-slate-700 focus:border-brand-orange rounded-xl px-4 py-3.5 text-white outline-none transition-colors data-lang-placeholder" data-i18n="ph_phone" type="tel" required placeholder="np. +48 123 456 789">
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider data-lang" data-i18n="lbl_email">Adres E-mail</label>
+                            <input class="w-full bg-brand-gray border border-slate-700 focus:border-brand-orange rounded-xl px-4 py-3.5 text-white outline-none transition-colors data-lang-placeholder" data-i18n="ph_email" type="email" required placeholder="np. jan.kowalski@gmail.com">
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider data-lang" data-i18n="lbl_course">Interesujący Cię kierunek szkolenia</label>
+                            <select class="w-full bg-brand-gray border border-slate-700 focus:border-brand-orange rounded-xl px-4 py-3.5 text-white outline-none transition-colors appearance-none" id="form-course-select" required>
+                                <option value="wozki-std" class="data-lang" data-i18n="opt_w_std">Operator wózków widłowych (Standard)</option>
+                                <option value="wozki-spec" class="data-lang" data-i18n="opt_w_spec">Operator wózków widłowych specjalizowanych</option>
+                                <option value="udt-podesty" class="data-lang" data-i18n="opt_podesty">Operator podestów ruchomych przejezdnych</option>
+                                <option value="spawalnictwo-mag" class="data-lang" data-i18n="opt_mag">Szkolenie Spawalnicze MAG 135</option>
+                                <option value="spawalnictwo-mig" class="data-lang" data-i18n="opt_mig">Szkolenie Spawalnicze MIG 131</option>
+                                <option value="spawalnictwo-tig" class="data-lang" data-i18n="opt_tig">Szkolenie Spawalnicze TIG 141</option>
+                                <option value="pierwsza-pomoc" class="data-lang" data-i18n="opt_pp">Szkolenie z pierwszej pomocy dla pracowników</option>
+                                <option value="ppoz" class="data-lang" data-i18n="opt_ppoz">Szkolenie PPOŻ dla pracowników</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider data-lang" data-i18n="lbl_msg">Dodatkowe pytania / Uwagi</label>
+                            <textarea class="w-full bg-brand-gray border border-slate-700 focus:border-brand-orange rounded-xl px-4 py-3.5 text-white outline-none transition-colors h-32 resize-none data-lang-placeholder" data-i18n="ph_msg" placeholder="Miejsce na Twoje uwagi"></textarea>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <input class="mt-1 flex-shrink-0 accent-brand-orange w-4 h-4" type="checkbox" required>
+                            <label class="text-xs text-slate-500 leading-relaxed data-lang" data-i18n="lbl_privacy">Wyrażam zgodę na przetwarzanie danych osobowych podanych w formularzu w celu kontaktu i przygotowania oferty szkoleniowej przez Arc Pro Szkolenia.</label>
+                        </div>
+
+                        <button class="w-full bg-gradient-to-r from-brand-orange to-amber-500 text-white font-semibold py-4 rounded-xl transition-all shadow-xl shadow-brand-orange/20 data-lang" data-i18n="btn_form_submit">Wyślij zgłoszenie na szkolenie</button>
+                        <div id="form-result"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESTRUCTURED SCHEMATIC FOOTER -->
+    <footer class="bg-brand-darker border-t border-brand-gray/60 py-12 text-slate-400 text-xs sm:text-sm text-left">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-12 mb-8 border-b border-brand-gray/30">
+                
+                <!-- Left Side: Transfer details & Contact Column -->
+                <div class="lg:col-span-6 space-y-8">
+                    <!-- Account Data Block -->
+                    <div class="space-y-4">
+                        <h3 class="font-display font-bold text-white text-base tracking-wide uppercase">
+                            <span class="data-lang" data-i18n="f_transfer_h">DANE DO PRZELEWU</span>
+                            <span class="block w-12 h-[2px] bg-brand-orange mt-1.5"></span>
+                        </h3>
+                        <div class="text-slate-300 space-y-1">
+                            <p class="font-semibold text-white data-lang" data-i18n="f_company">Arc Pro Sp. z o.o.</p>
+                            <p class="data-lang" data-i18n="f_address">ul. Przemysłowa 42, 00-001 Warszawa</p>
+                        </div>
+                        <div class="text-slate-300">
+                            <p class="font-bold text-white tracking-wide data-lang" data-i18n="f_bank">PKO BANK POLSKI</p>
+                            <p class="font-bold text-brand-orange tracking-tight text-base mt-0.5 data-lang" data-i18n="f_iban">PL 49 1020 5555 0000 8888 1234 5678</p>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed max-w-xl data-lang" data-i18n="f_transfer_p">
+                            W tytule przelewu prosimy wpisać: imię, nazwisko oraz rodzaj wybranego szkolenia. W przypadku firm prosimy dodać numer NIP nabywcy w polu uwag przelewu - potrzebny do sprawnego wystawienia faktury VAT.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h3 class="font-display font-bold text-white text-base tracking-wide uppercase">
+                            <span class="data-lang" data-i18n="f_contact_h">KONTAKT</span>
+                            <span class="block w-12 h-[2px] bg-brand-orange mt-1.5"></span>
+                        </h3>
+                        <div class="text-slate-300 space-y-1.5">
+                            <p class="font-bold text-white text-base data-lang" data-i18n="f_tel">tel. +48 500 600 700</p>
+                            <p><a href="mailto:kontakt@arcproszkolenia.pl" class="hover:text-brand-orange transition-colors">kontakt@arcproszkolenia.pl</a></p>
+                        </div>
+                        <div class="text-xs text-slate-400 space-y-2">
+                            <p class="font-semibold text-slate-300 uppercase tracking-wider text-[10px] data-lang" data-i18n="f_address_label">Adres ośrodka:</p>
+                            <p class="data-lang" data-i18n="f_address_val">ul. Przemysłowa 42, Warszawa (Główna baza spawalnicza i plac manewrowy)</p>
+                            <div class="pt-1">
+                                <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x470fde5cc10282eb:0xb3ac4fe4dafb1968?sa=X&ved=1t:8290&ictx=111" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-brand-gray/60 hover:bg-slate-700 text-white text-xs font-semibold px-3 py-2 rounded-xl border border-slate-700 transition-colors">
+                                    <i class="fa-solid fa-location-dot text-brand-orange"></i> <span class="data-lang" data-i18n="c_box_gmaps">Nawiguj do bazy w Google Maps</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side Course List Column (Deep Interactive Linking Back To Filters Fixed) -->
+                <div class="lg:col-span-6 space-y-4">
+                    <h3 class="font-display font-bold text-white text-base tracking-wide uppercase">
+                        <span class="data-lang" data-i18n="f_courses_h">KURSY</span>
+                        <span class="block w-12 h-[2px] bg-brand-orange mt-1.5"></span>
+                    </h3>
+                    
+                    <div class="divide-y divide-brand-gray/40 border-t border-b border-brand-gray/40">
+                        <button onclick="filterCourses('wozki');" class="w-full flex items-center gap-3 py-3 text-left font-semibold text-slate-200 hover:text-brand-orange transition-colors group">
+                            <i class="fa-solid fa-chevron-down text-brand-orange text-[10px] transform group-hover:translate-x-1 transition-transform"></i> <span class="data-lang" data-i18n="f_wozki_merged">Wózki Widłowe</span>
+                        </button>
+                        <button onclick="filterCourses('podesty');" class="w-full flex items-center gap-3 py-3 text-left font-semibold text-slate-200 hover:text-brand-orange transition-colors group">
+                            <i class="fa-solid fa-chevron-down text-brand-orange text-[10px] transform group-hover:translate-x-1 transition-transform"></i> <span class="data-lang" data-i18n="f_c3">Operator podestów ruchomych przejezdnych</span>
+                        </button>
+                        <button onclick="filterCourses('mag');" class="w-full flex items-center gap-3 py-3 text-left font-semibold text-slate-200 hover:text-brand-orange transition-colors group">
+                            <i class="fa-solid fa-chevron-down text-brand-orange text-[10px] transform group-hover:translate-x-1 transition-transform"></i> <span class="data-lang" data-i18n="f_mag">Kurs spawania MAG 135</span>
+                        </button>
+                        <button onclick="filterCourses('mig');" class="w-full flex items-center gap-3 py-3 text-left font-semibold text-slate-200 hover:text-brand-orange transition-colors group">
+                            <i class="fa-solid fa-chevron-down text-brand-orange text-[10px] transform group-hover:translate-x-1 transition-transform"></i> <span class="data-lang" data-i18n="f_mig">Kurs spawania MIG 131</span>
+                        </button>
+                        <button onclick="filterCourses('tig');" class="w-full flex items-center gap-3 py-3 text-left font-semibold text-slate-200 hover:text-brand-orange transition-colors group">
+                            <i class="fa-solid fa-chevron-down text-brand-orange text-[10px] transform group-hover:translate-x-1 transition-transform"></i> <span class="data-lang" data-i18n="f_tig">Kurs spawania TIG 141</span>
+                        </button>
+                        <button onclick="navigateToView('main-landing', '#pierwsza-pomoc-sekcja');" class="w-full flex items-center gap-3 py-3 text-left font-semibold text-slate-200 hover:text-brand-orange transition-colors group">
+                            <i class="fa-solid fa-chevron-down text-brand-orange text-[10px] transform group-hover:translate-x-1 transition-transform"></i> <span class="data-lang" data-i18n="f_c4">Pierwsza Pomoc Przedmedyczna</span>
+                        </button>
+                        <button onclick="navigateToView('main-landing', '#ppoz-sekcja');" class="w-full flex items-center gap-3 py-3 text-left font-semibold text-slate-200 hover:text-brand-orange transition-colors group">
+                            <i class="fa-solid fa-chevron-down text-brand-orange text-[10px] transform group-hover:translate-x-1 transition-transform"></i> <span class="data-lang" data-i18n="f_c5">Ochrona Przeciwpożarowa (PPOŻ)</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4 text-[11px] text-slate-500">
+                <div class="flex items-center gap-2">
+                    <div class="w-5 h-5 bg-brand-gray border border-slate-700 rounded flex items-center justify-center font-bold text-white text-[10px]">AP</div>
+                    <span><span class="data-lang" data-i18n="f_copy_prefix">&copy; 2026 Arc Pro Szkolenia.</span> <span class="data-lang" data-i18n="f_copy">Wszystkie prawa zastrzeżone.</span></span>
+                </div>
+                <button id="privacy-policy-footer-trigger" class="hover:underline text-slate-500 hover:text-slate-400 data-lang" data-i18n="f_privacy">Polityka prywatności</button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL POLITYKA PRYWATNOSCI -->
+    <div id="privacy-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-brand-dark/90 backdrop-blur-sm p-4">
+        <div class="bg-brand-darker border border-brand-gray rounded-2xl p-6 sm:p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative text-left">
+            <button id="close-privacy-btn" class="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h2 class="font-display font-bold text-2xl text-white mb-4 data-lang" data-i18n="modal_title">Polityka Prywatności</h2>
+            <div class="space-y-4 text-sm text-slate-300 leading-relaxed">
+                <p class="data-lang" data-i18n="modal_p1">Administratorem Twoich danych osobowych jest Arc Pro Szkolenia z siedzibą w Warszawie. Twoje dane przetwarzane są wyłącznie w celu realizacji zgłoszeń szkoleniowych, kontaktu z klientem oraz wystawiania odpowiednich certyfikatów.</p>
+                <p class="data-lang" data-i18n="modal_p2">Masz prawo do wglądu, modyfikacji oraz żądania usunięcia swoich danych z naszej bazy w dowolnym momencie. Strona nie używa inwazyjnych ciasteczek (cookies) śledzących do celów marketingowych, a jedynie te niezbędne do prawidłowego funkcjonowania witryny.</p>
+            </div>
+            <div class="mt-8 pt-4 border-t border-brand-gray/60 text-right">
+                <button id="close-privacy-bottom-btn" class="bg-brand-gray hover:bg-slate-700 text-white font-semibold px-6 py-2 rounded-xl transition-colors data-lang" data-i18n="modal_close">Rozumiem i zamykam</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- INTERACTIVE MULTI-LANGUAGE TRANSLATION DICTIONARY SYSTEM (100% FIXED) -->
+    <script>
+        const dictionary = {
+            pl: {
+                page_title: "Arc Pro Szkolenia | Profesjonalne Szkolenia Techniczne",
+                nav_sub: "SZKOLENIA", nav_start: "Start", nav_oferta: "Oferta Szkoleń", nav_terminy: "Terminy", nav_cennik: "Cennik", nav_faq: "FAQ & Asystent AI", nav_kontakt: "Kontakt", btn_header_cta: "Zapisz się na kurs", nav_blog: "Blog",
+                hero_badge: "Uprawnienia Państwowe i Certyfikaty", hero_title_1: "Szkolenia Techniczne", hero_desc: "Odkryj profesjonalne kursy zawodowe. Zdobądź praktyczne umiejętności, uprawnienia i nowoczesną wiedzę pod okiem ekspertów. Elastyczna oferta dla firm oraz klientów indywidualnych.",
+                f1_title: "Spawanie TIG / MIG / MAG", f1_desc: "Praktyczna nauka od podstaw", f2_title: "Wózki Widłowe & Podesty UDT", f2_desc: "Pełne uprawnienia państwowe", f3_title: "Pierwsza Pomoc", f3_desc: "Praktyczne algorytmy RKO i AED", f4_title: "Trening PPOŻ", f4_desc: "Praktyczne gaszenie pożarów",
+                filter_title: "Filtruj według kategorii", filter_hide: "Ukryj filtrowanie", f_all: "Wszystkie kategorie", f_wozki_merged: "Wózki Widłowe", f_podesty: "Podesty Ruchome", f_mag_filter: "Spawanie MAG", f_mig: "Spawanie MIG", f_tig: "Spawanie TIG",
+                c_sub_label: "Zakres szkolenia:", c_materials_h: "Rozbicie na materiały i poziomy:", c_btn_book: "Zarezerwuj kurs",
+                c_w1_title: "Wózki Widłowe", c_w1_desc_merged: "Kompleksowe szkolenia operatorskie UDT. Przygotowujemy do obsługi klasycznych wózków jezdniowych oraz zaawansowanych maszyn specjalizowanych.", sub_w_std_title: "Wózki standardowe", sub_w_std_foot: "Z wyłączeniem urządzeń specjalizowanych (wózki czołowe i boczne Reach Truck).", sub_w_spec_title: "Wózki specjalizowane", sub_w_spec_foot: "Wózki jezdniowe z operatorem podnoszonym wraz z ładunkiem oraz ładowarki teleskopowe.",
+                c_w3_title: "Podesty Ruchome Przejezdne", c_w3_desc: "Szkolenia operatorskie przygotowujące pod egzamin UDT (podesty koszowe i nożycowe).", udt_f1: "Podesty nożycowe", udt_f2: "Podesty koszowe samojezdne",
+                c_w4_title: "Kurs Spawania MAG 135", c_w4_desc: "Wydajne spawanie półautomatyczne drutem topliwym w osłonie gazów aktywnych. Podstawa w konstrukcjach stalowych.", w_levels_p: "Poziom 1, Poziom 2, Poziom 3", c_w4_mat1: "Stal czarna", c_w4_mat2: "Stal nierdzewna",
+                c_w5_title: "Kurs Spawania MIG 131", c_w5_desc: "Półautomatyczne łączenie metali lekkich w osłonie gazów obojętnych. Kluczowe przy obróbce stopów lekkich.", c_w5_mat1: "Aluminium",
+                c_w6_title: "Kurs Spawania TIG 141", c_w6_desc: "Precyzyjne spawanie nietopliwą elektrodą wolframowej. Najbardziej elitarna metoda spawalnicza na rynku.", c_w6_mat1: "Stal czarna", c_w6_mat2: "Stal nierdzewna", c_w6_mat3: "Aluminium",
+                fa_tag: "Bezpieczeństwo Przedmedyczne", fa_title: "Szkolenie z pierwszej pomocy dla pracowników", fa_desc: "Praktyczny trening oparty na wytycznych Europejskiej Rady Resuscytacji. Kładziemy nacisk na symulowane sytuacje ratownicze w środowisku pracy.", fa_btn: "Zapisz się na Pierwszą Pomoc",
+                fire_tag: "Bezpieczeństwo Ogniowe", fire_title: "Szkolenie PPOŻ dla pracowników", fire_desc: "Program dostosowany do wymogów prawnych Kodeksu Pracy dla osób wyznaczonych do zwalczania pożarów i prowadzenia ewakuacji. Część praktyczna prowadzona jest przy użyciu trenażerów gazowych.", fire_btn: "Zapisz się na PPOŻ",
+                dates_tag: "Terminarz Zajęć", dates_title: "Najbliższe Wolne Terminy", month_july: "Lipiec", t_row1: "Kurs Spawania TIG (141) - Wszystkie Poziomy", t_w1_row: "Wózki Widłowe (Standardowe)", t_row3: "Operator Podestów Ruchomych (Wzwyżki UDT)", status_open: "Zapisy otwarte", btn_table_book: "Zapisz się",
+                prices_title: "Cennik Szkoleń", comp_title: "Porównanie i Szczegóły Szkoleń", comp_sub: "Zobacz zestawienie czasowe oraz rodzaj uzyskanych uprawnień.", th1: "Rodzaj szkolenia", th2: "Cena brutto", th3: "Opłata egzaminacyjna", th4: "Ważność uprawnień", row1_c1: "Kursy Spawalnicze (MIG/TIG/MAG)", row1_c3: "Książeczka Spawacza, Certyfikat Instytutu Spawalnictwa", row1_c4: "3 lata (z możliwością przedłużenia)", row2_c1: "Urządzenia UDT (Wózki / Podesty)", row2_c3: "Zaświadczenie Kwalifikacyjne UDT", row2_c4: "5 do 10 lat",
+                back_to_main: "Powrót do strony głównej",
+                faq_tag: "Centrum Pomocy", faq_title: "Baza Wiedzy FAQ", faq_q1: "Czy przed kursem spawalniczym muszę mieć doświadczenie?", faq_a1: "Absolutnie nie! Nasze kursy spawalnicze TIG oraz MIG są skonstruowane tak, aby uczyć od kompletnych podstaw. Ponad 80% zajęć to czysta praktyka pod okiem doświadczonych inżynierów spawalnictwa IWE.", faq_q2: "Jak wygląda egzamin państwowy UDT na podesty?", faq_a2: "Egzamin składa się z dwóch części przed komisją UDT: części teoretycznej (test wiedzy na komputerze) oraz praktycznej (obsługa maszyny i manewry na placu). Nasz program pokrywa 100% pytań egzaminacyjnych.", faq_q3: "Czy mogę płacić za szkolenia w ratach?", faq_a3: "Nie, obecnie nie ma możliwości płatności w ratach. Wszystkie opłaty za szkolenia oraz testy certyfikacyjne należy uregulować w całości przelewem lub gotówką przed oficjalnym rozpoczęciem kursu.",
+                faq_q4: "Czy wymagane są badania lekarskie przed rozpoczęciem kursu UDT?", faq_a4: "Tak, do obsługi wózków widłowych oraz podestów ruchomych wymagane jest podstawowe orzeczenie lekarza medycyny pracy o braku przeciwwskazań zdrowotnych do obsługi urządzeń mechanicznych (w tym badania psychotechniczne).", faq_q5: "Co dzieje się w przypadku niezdania egzaminu UDT?", faq_a5: "W przypadku negatywnego wyniku z części teoretycznej lub praktycznej, możliwe jest złożenie wniosku o wyznaczenie terminu poprawkowego. Wiąże się to z koniecznością ponownego wniesienia państwowej opłaty egzaminacyjnej UDT.",
+                bot_title: "Asystent AI ARC PRO", bot_status: "Odpowiada natychmiast", bot_welcome: "Cześć! Jestem Twoim wirtualnym asystentem. Przeanalizuję Twoje pytanie i natychmiast udzielę informacji o kursach, cenach, ratach lub egzaminach UDT. O co chcesz zapytać?", bot_prompt_label: "Kliknij gotowe pytanie:", p_q1: "Ile kosztuje kurs na wzwyżki?", p_q2: "Czy można płacić w ratach?",
+                form_section_tag: "Kontakt i Zapisy", form_section_title: "Zbuduj swoją przyszłość już dziś", form_section_desc: "Masz pytania dotyczące programów szkoleń, finansowania lub wolnych terminów? Skontaktuj się bezpośrednio z naszym biurem obsługi lub wypełnij formularz zgłoszeniowy.", c_box_phone: "Zadzwoń do nas", c_box_mail: "Wyślij e-mail", c_box_gmaps: "Zobacz lokalizację w Google Maps", c_box_hq: "Lokalizacja bazy", form_title: "Formularz Zgłoszeniowy", lbl_name: "Imię i Nazwisko / Nazwa Firmy", lbl_phone: "Numer Telefonu", lbl_email: "Adres E-mail", lbl_course: "Interesujący Cię kierunek szkolenia", lbl_msg: "Dodatkowe pytania / Uwagi", lbl_privacy: "Wyrażam zgodę na przetwarzanie danych osobowych podanych w formularzu w celu kontaktu i przygotowania oferty szkoleniowej przez Arc Pro Szkolenia.", btn_form_submit: "Wyślij zgłoszenie na szkolenie",
+                f_transfer_h: "DANE DO PRZELEWU", f_transfer_p: "W tytule przelewu prosimy wpisać: imię, nazwisko oraz rodzaj wybranego szkolenia. W przypadku firm prosimy dodać numer NIP nabywcy w polu uwag przelewu - potrzebny do sprawnego wystawienia faktury VAT.", f_contact_h: "KONTAKT", f_address_label: "Adres ośrodka:", f_address_val: "ul. Przemysłowa 42, Warszawa (Główna baza spawalnicza i plac manewrowy)", f_courses_h: "KURSY", f_c1: "Operator wózków widłowych (Standard)", f_c2: "Operator wózków widłowych specjalizowanych", f_c3: "Operator podestów ruchomych przejezdnych", f_mag: "Kurs spawania MAG 135", f_mig: "Kurs spawania MIG 131", f_tig: "Kurs spawania TIG 141", f_copy: "Wszystkie prawa zastrzeżone.", f_privacy: "Polityka prywatności",
+                tbl_c_h1: "Rodzaj szkolenia", tbl_c_h2: "Cena brutto", tbl_c_h3: "Opłata egzaminacyjna", fee_inc: "W cenie certyfikacji", fee_none: "Brak dodatkowych opłat", sub_status_h: "Status szkolenia", p_btn: "Zgłoś się", sub_status_btn: "Zapisz się na szkolenie",
+                about_tag: "O NASZEJ FIRMIE", about_title: "Kim jesteśmy i co nas wyróżnia?", about_p1: "<strong>Arc Pro Szkolenia</strong> to nowoczesny ośrodek szkoleniowy z wieloletnim doświadczeniem w branży przemysłowej. Specjalizujemy się w podnoszeniu kwalifikacji zawodowych pracowników w pożądanych profesjach technicznych. Nasz zespół tworzą inżynierowie spawalnictwa oraz certyfikowani instruktorzy.",
+                t_tig: "Kurs Spawania TIG 141 (Poziomy 1-3)", t_mig: "Kurs Spawania MIG 131 (Poziomy 1-3)", t_mag: "Kurs Spawania MAG 135 (Poziomy 1-3)", p_1900: "od 1900 zł", t_w_std: "Wózki Widłowe (Standardowe Operator)", p_750: "750 zł", fee_udt: "+250 zł (Egzamin państwowy UDT)", t_w_spec: "Wózki Widłowe Specjalizowane", p_1100: "1100 zł", t_podesty: "Operator podestów ruchomych przejezdnych", p_950: "950 zł", t_pp: "Szkolenie z pierwszej pomocy dla pracowników", p_350: "350 zł", t_ppoz: "Szkolenie PPOŻ dla pracowników", p_400: "400 zł",
+                row3_c1: "Szkolenia dla pracowników (Pierwsza Pomoc / PPOŻ)", row3_c3: "Certyfikat ukończenia zgodny z wymogami Kodeksu Pracy", row3_c4: "Zalecane odnowienie co 2 lata",
+                opt_w_std: "Operator wózków widłowych (Standard)", opt_w_spec: "Operator wózków widłowych specjalizowanych", opt_podesty: "Operator podestów ruchomych przejezdnych", opt_mag: "Szkolenie Spawalnicze MAG 135", opt_mig: "Szkolenie Spawalnicze MIG 131", opt_tig: "Szkolenie Spawalnicze TIG 141", opt_pp: "Szkolenie z pierwszej pomocy dla pracowników", opt_ppoz: "Szkolenie PPOŻ dla pracowników",
+                ph_name: "np. Jan Kowalski", ph_phone: "np. +48 123 456 789", ph_email: "np. jan.kowalski@gmail.com", ph_msg: "Miejsce na Twoje uwagi", ph_chat: "Wpisz swoje pytanie tutaj...",
+                t_mig_course: "Kurs Spawania MIG 131", t_mag_course: "Kurs Spawania MAG 135", t_tig_course: "Kurs Spawania TIG 141", t_w_std_course: "Wózki Widłowe (Standardowe)", t_w_spec_course: "Wózki Widłowe Specjalizowane", t_podesty_course: "Podesty Ruchome Przejezdne (UDT)", t_ppoz_course: "Szkolenie PPOŻ dla pracowników", t_pp_course: "Szkolenie z pierwszej pomocy",
+                loc_waw: "Baza Warszawa", loc_log: "Centrum logistyczne", loc_yard: "Plac ćwiczeniowy", loc_room1: "Sala szkoleniowa", loc_room2: "Sala dydaktyczna",
+                f_company: "Arc Pro Sp. z o.o.", f_address: "ul. Przemysłowa 42, 00-001 Warszawa", f_bank: "PKO BANK POLSKI", f_iban: "PL 49 1020 5555 0000 8888 1234 5678", f_tel: "tel. +48 500 600 700", f_copy_prefix: "&copy; 2026 Arc Pro Szkolenia.",
+                form_loading: "Trwa wysyłanie zgłoszenia...", form_success: "Dziękujemy! Twoje zgłoszenie zostało wysłane pomyślnie. Skontaktujemy się z Tobą wkrótce.",
+                bot_ans_default: "Dziękuję za zapytanie! Jestem inteligentnym asystentem biura ARC PRO. Jeżeli chcesz poznać szczegóły, napisz konkretne hasło kluczowe, np.: cennik, raty, lokalizacja, czas trwania, lub wybierz jedno z gotowych pytań z panelu.", bot_ans_price: "Aktualny cennik ARC PRO prezentuje się następująco:<br>• Wózki Widłowe (Standard): 750 zł<br>• Wózki Specjalizowane UDT: 1100 zł<br>• Podesty ruchome (Wzwyżki UDT): 950 zł<br>• Kursy spawalnicze (MIG/MAG/TIG): od 1900 zł.<br>Zapisy na wszystkie kierunki są obecnie otwarte!", bot_ans_installments: "Nie, obecnie nie ma możliwości płatności w ratach. Wszystkie opłaty za szkolenia oraz testy certyfikacyjne należy uregulować w całości przelewem lub gotówką przed oficjalnym rozpoczęciem kursu.", bot_ans_forklift: "Prowadzimy dwa osobne szkolenia na wózki zintegrowane w jednej karcie: Standardowe (z wyłączeniem specjalizowanych) w cenie 750 zł os oraz Wózki Specjalizowane (ładowarki teleskopowe) w cenie 1100 zł.", bot_ans_weld: "Szkolimy kompleksowo w metodach MAG 135 (Stal czarna/nierdzewna poziomy 1-3), MIG 131 (Aluminium poziomy 1-3) oraz TIG 141 (Stal czarna/nierdzewna/aluminium poziomy 1-3). Ceny od 1900 zł.",
+                modal_title: "Polityka Prywatności", modal_p1: "Administratorem Twoich danych osobowych jest Arc Pro Szkolenia z siedzibą w Warszawie. Twoje dane przetwarzane są wyłącznie w celu realizacji zgłoszeń szkoleniowych, kontaktu z klientem oraz wystawiania odpowiednich certyfikatów.", modal_p2: "Masz prawo do wglądu, modyfikacji oraz żądania usunięcia swoich danych z naszej bazy w dowolnym momencie. Strona nie używa inwazyjnych ciasteczek (cookies) śledzących do celów marketingowych, a jedynie te niezbędne do prawidłowego funkcjonowania witryny.", modal_close: "Rozumiem i zamykam",
+                w_section_tag: "Profesjonalna Ścieżka Zawodowa", w_section_title: "Kursy Zawodowe i Certyfikacja", p_btn_label: "Zapisy",
+                chat_you: "Ty", chat_bot: "Asystent AI"
+            },
+            en: {
+                page_title: "Arc Pro Training | Professional Technical Courses",
+                nav_sub: "TRAINING", nav_start: "Start", nav_oferta: "Courses Offer", nav_terminy: "Schedule", nav_cennik: "Pricing", nav_faq: "FAQ & AI Bot", nav_kontakt: "Contact", btn_header_cta: "Enroll in Course", nav_blog: "Blog",
+                hero_badge: "State Licenses & Certifications", hero_title_1: "Technical Training", hero_desc: "Discover professional vocational courses. Gain practical skills, state certifications, and cutting-edge knowledge from experts. Flexible offers for individuals and business.",
+                f1_title: "Welding TIG / MIG / MAG", f1_desc: "Practical learning from scratch", f2_title: "Forklifts & Lifts UDT", f2_desc: "Full state certifications", f3_title: "First Aid", f3_desc: "CPR & AED dynamic practice", f4_title: "Fire Safety", f4_desc: "Real controlled fire practice",
+                filter_title: "Filter by category", filter_hide: "Hide filtering", f_all: "All categories", f_wozki_merged: "Forklifts", f_podesty: "Lift Platforms", f_mag_filter: "MAG Welding", f_mig: "MIG Welding", f_tig: "TIG Welding",
+                c_sub_label: "Course scope:", c_materials_h: "Breakdown into materials and levels:", c_btn_book: "Book Course",
+                c_w1_title: "Forklift Trucks", c_w1_desc_merged: "Comprehensive UDT operator licensing courses. Learn standard forklift handling as well as advanced specialized machinery control structures.", sub_w_std_title: "Standard Forklifts", sub_w_std_foot: "Excluding specialized platforms (counterbalanced and reach trucks).", sub_w_spec_title: "Specialized Forklifts", sub_w_spec_foot: "Telescopic handlers and industrial container heavy weight lifters with driver cab.",
+                c_w3_title: "Mobile Lift Platforms Operator", c_w3_desc: "Operator dynamic certifications for scissor and self-propelled boom lift systems under UDT code rules.", udt_f1: "Scissor platforms", udt_f2: "Boom platforms",
+                c_w4_title: "MAG 135 Welding Course", c_w4_desc: "MAG (135) semi-automatic gas wire processing methodologies.", c_w4_mat1: "Carbon steel", w_levels_p: "Level 1, Level 2, Level 3", c_w4_mat2: "Stainless steel",
+                c_w5_title: "MIG 131 Welding Course", c_w5_desc: "MIG (131) gas-shielded structural engineering methodologies.", c_w5_mat1: "Aluminum",
+                c_w6_title: "TIG 141 Welding Course", c_w6_desc: "TIG (141) tungsten inert gas precision processing.", c_w6_mat1: "Carbon steel", c_w6_mat2: "Stainless steel", c_w6_mat3: "Aluminum",
+                fa_tag: "Pre-Medical Response", fa_title: "First Aid Training for Employees", fa_desc: "Hands-on emergency drills based entirely on the European Resuscitation Council standards. We emphasize realistic workplace incident simulation.", fa_btn: "Enroll in First Aid",
+                fire_tag: "Fire Hazard Control", fire_title: "Fire Safety Training for Employees", fire_desc: "Curriculum structurally compliant with labor laws for individuals designated for firefighting and site evacuation. Practical application includes real gas-fueled fire containment.", fire_btn: "Enroll in Fire Safety",
+                dates_tag: "Course Schedule", dates_title: "Upcoming Available Dates", month_july: "July", t_row1: "TIG Welding (141) - All Levels", t_w1_row: "Forklifts (Standard Operator)", t_row3: "Lift Platform Operator (UDT License)", status_open: "Registration Open", btn_table_book: "Register Now",
+                prices_title: "Training Pricing", comp_title: "Comparison & Training Details", comp_sub: "Review duration details, certification types, and license validities.", th1: "Training Type", th2: "Gross price", th3: "Exam fee", th4: "License Validity", row1_c1: "Welding Courses (MIG/TIG/MAG)", row1_c3: "Welder Logbook, Institute of Welding Certificate", row1_c4: "3 years (extendable upon verification)", row2_c1: "UDT Equipment (Trucks / Lifts)", row2_c3: "Official UDT Qualification Certificate", row2_c4: "5 to 10 years",
+                back_to_main: "Back to Home Page", sub_status_h: "Course Status", sub_status_p: "Registration for the next batch of classes is active. Secure your slot directly through the main application form.", sub_status_btn: "Go to application form",
+                faq_tag: "Support Center", faq_title: "FAQ Knowledge Base", faq_q1: "Do I need prior experience before the welding course?", faq_a1: "Absolutely not! Our TIG and MIG programs are designed for complete beginners. More than 80% of the curriculum is direct arc-time practice with certified IWE engineers.", faq_q2: "What does the UDT state exam look like?", faq_a2: "The exam consists of two parts before the UDT commission: a theoretical part (test on a computer) and a practical part (machine operation and maneuvers on the field). We cover 100% of the topics.", faq_q3: "Can I pay for training in installments?", faq_a3: "No, currently installments are not available. All course and test certification balances must be paid in full via bank transfer or cash prior to the course launch.",
+                faq_q4: "Are medical checks required before UDT training?", faq_a4: "Yes, an occupational health clearance is legally mandatory to verify fitness to operate mechanical weight lifters.", faq_q5: "What happens if I fail the UDT board exam?", faq_a5: "You are allowed to book a re-take appointment with the local UDT department. An extra examination processing fee will apply.",
+                bot_title: "ARC PRO AI Assistant", bot_status: "Replies instantly", bot_welcome: "Hi! I'm your virtual assistant. I'll analyze your question and instantly provide info about courses, prices, installments, or UDT exams. What would you like to ask?", bot_prompt_label: "Click a quick question:", p_q1: "How much does the lift course cost?", p_q2: "Can I pay in installments?",
+                form_section_tag: "Contact & Registration", form_section_title: "Build Your Technical Career Today", form_section_desc: "Have inquiries about funding, corporate discounts, or calendar openings? Reach out to our customer support desk or submit the form.", c_box_phone: "Call us directly", c_box_mail: "Send an email", c_box_gmaps: "View on Google Maps", c_box_hq: "Facility Location", form_title: "Enrollment Form", lbl_name: "Full Name / Company Brand", lbl_phone: "Phone Number", lbl_email: "Email Address", lbl_course: "Target Training Program", lbl_msg: "Additional Requests / Inquiries", lbl_privacy: "I hereby consent to processing my personal information to prepare and present custom quotes by Arc Pro Training.", btn_form_submit: "Submit Training Application",
+                f_transfer_h: "BANK TRANSFER DETAILS", f_transfer_p: "Please specify the trainee name and targeted training model in the wire transfer description. For corporate accounts, add your tax NIP identification within the transfer comments.", f_contact_h: "CONTACT DESK", f_address_label: "Training Center Address:", f_address_val: "42 Przemyslowa Street, 00-001 Warsaw (Main Weld Lab & Maneuver Yard)", f_courses_h: "PROGRAMS", f_c1: "Standard Forklift Course", f_c2: "Specialized Forklift Course", f_c3: "Mobile Lift Platforms (UDT)", f_mag: "MAG 135 Welding Course", f_mig: "MIG 131 Welding Course", f_tig: "TIG 141 Welding Course", f_copy: "All rights reserved.", f_privacy: "Privacy policy",
+                tbl_c_h1: "Training Type", tbl_c_h2: "Gross price", tbl_c_h3: "Exam fee", fee_inc: "Included in price", fee_none: "No additional fees", p_btn: "Apply", sub_status_btn: "Go to registration form",
+                about_tag: "ABOUT OUR COMPANY", about_title: "Who are we and what makes us stand out?", about_p1: "<strong>Arc Pro Training</strong> is a modern training center with years of industrial experience. We specialize in enhancing vocational qualifications in high-demand technical professions. Our team consists of welding engineers and certified instructors.",
+                t_tig: "TIG 141 Welding Course (Levels 1-3)", t_mig: "MIG 131 Welding Course (Levels 1-3)", t_mag: "MAG 135 Welding Course (Levels 1-3)", p_1900: "from 1900 PLN", t_w_std: "Forklifts (Standard Operator)", p_750: "750 PLN", fee_udt: "+250 PLN (UDT State Exam)", t_w_spec: "Specialized Forklifts", p_1100: "1100 PLN", t_podesty: "Mobile Lift Platforms Operator", p_950: "950 PLN", t_pp: "First Aid Training for Employees", p_350: "350 PLN", t_ppoz: "Fire Safety Training for Employees", p_400: "400 PLN",
+                row3_c1: "Employee Training (First Aid / Fire Safety)", row3_c3: "Certificate of Completion aligned with Labor Code", row3_c4: "Recommended renewal every 2 years",
+                opt_w_std: "Standard Forklift Operator", opt_w_spec: "Specialized Forklift Operator", opt_podesty: "Mobile Lift Platforms Operator", opt_mag: "MAG 135 Welding Training", opt_mig: "MIG 131 Welding Training", opt_tig: "TIG 141 Welding Training", opt_pp: "First Aid Training for Employees", opt_ppoz: "Fire Safety Training for Employees",
+                ph_name: "e.g. John Doe", ph_phone: "e.g. +48 123 456 789", ph_email: "e.g. john.doe@gmail.com", ph_msg: "Space for your remarks", ph_chat: "Type your question here...",
+                t_mig_course: "MIG 131 Welding Course", t_mag_course: "MAG 135 Welding Course", t_tig_course: "TIG 141 Welding Course", t_w_std_course: "Forklifts (Standard)", t_w_spec_course: "Specialized Forklifts", t_podesty_course: "Mobile Lift Platforms (UDT)", t_ppoz_course: "Fire Safety Training", t_pp_course: "First Aid Training",
+                loc_waw: "Warsaw Base", loc_log: "Logistics Center", loc_yard: "Maneuver Yard", loc_room1: "Training Room", loc_room2: "Didactic Room",
+                f_company: "Arc Pro Ltd.", f_address: "42 Przemysłowa St, 00-001 Warsaw", f_bank: "PKO BANK POLSKI", f_iban: "PL 49 1020 5555 0000 8888 1234 5678", f_tel: "tel. +48 500 600 700", f_copy_prefix: "&copy; 2026 Arc Pro Training.",
+                form_loading: "Sending your application...", form_success: "Thank you! Your application has been sent successfully. We will contact you shortly.",
+                bot_ans_default: "Thank you for asking! I'm the ARC PRO intelligent assistant. If you want details, please type a keyword like: price, installments, location, or select a prompt.", bot_ans_price: "Current ARC PRO pricing:<br>• Standard Forklifts: 750 PLN<br>• Specialized Forklifts UDT: 1100 PLN<br>• Mobile Lifts (UDT): 950 PLN<br>• Welding courses (MIG/MAG/TIG): from 1900 PLN.<br>Enrollment is open!", bot_ans_installments: "No, installments are currently not available. All training and exam fees must be paid in full via bank transfer or cash before the course starts.", bot_ans_forklift: "We run two separate courses: Standard Forklifts (750 PLN) and Specialized Forklifts like telescopic handlers (1100 PLN).", bot_ans_weld: "We train in MAG 135 (Carbon/Stainless levels 1-3), MIG 131 (Aluminum levels 1-3) and TIG 141 (Carbon/Stainless/Aluminum levels 1-3). Prices start from 1900 PLN.",
+                modal_title: "Privacy Policy", modal_p1: "The administrator of your personal data is Arc Pro Training based in Warsaw. Your data is processed exclusively to manage training applications, customer contact, and certification issuance.", modal_p2: "You have the right to access, modify, and request deletion of your data from our database at any time. This website does not use invasive tracking cookies for marketing purposes, only those necessary for proper functionality.", modal_close: "I understand and close",
+                w_section_tag: "Professional Career Path", w_section_title: "Vocational Courses & Certification", p_btn_label: "Enroll",
+                chat_you: "You", chat_bot: "AI Assistant"
+            },
+            uk: {
+                page_title: "Arc Pro Навчання | Професійні Технічні Курси",
+                nav_sub: "НАВЧАННЯ", nav_start: "Старт", nav_oferta: "Пропозиція", nav_terminy: "Терміни", nav_cennik: "Ціни", nav_faq: "FAQ та АІ Бот", nav_kontakt: "Контакти", btn_header_cta: "Записатися на курс", nav_blog: "Блог",
+                hero_badge: "Державні Сертифікати та Ліцензії", hero_title_1: "Технічне Навчання", hero_desc: "Відкрийте для себе професійні курси. Здобувайте практичні навички, державні сертифікати та сучасні знання під керівництвом експертів. Гнучкі умови для компаній та приватних осіб.",
+                f1_title: "Зварювання TIG / MIG / MAG", f1_desc: "Практика з першого дня", f2_title: "Навантажувачі та Підйомники", f2_desc: "Повні державні ліцензії", f3_title: "Перша Допомога", f3_desc: "Алгоритми СЛР та AED на практиці", f4_title: "Трення PPOŻ", f4_desc: "Практичне гасіння пожеж",
+                filter_title: "Фільтр за категорією", filter_hide: "Приховати фільтрацію", f_all: "Всі категорії", f_wozki_merged: "Навантажувачі", f_podesty: "Підйомні Платформи", f_mag_filter: "Зварювання MAG", f_mig: "Зварювання MIG", f_tig: "Зварювання TIG",
+                c_sub_label: "Обсяг навчання:", c_materials_h: "Поділ на матеріали та рівні:", c_btn_book: "Забронювати",
+                c_w1_title: "Автонавантажувачі", c_w1_desc_merged: "Комплексна сертифікаційна програма під кодами UDT. Навчаємо як керуванню базовими складськими навантажувачами, так і спеціальними телескопічними машинами.", sub_w_std_title: "Стандартні навантажувачі", sub_w_std_foot: "За винятком спеціалізованого обладнання (вилочні машини та штабелери ричтрак).", sub_w_spec_title: "Спеціалізовані навантажувачі", sub_w_spec_foot: "Телескопічні навантажувачі та складські агрегати з кабіною водія, що піднімається.",
+                c_w3_title: "Оператор Мобільних Підйомних Платформ", c_w3_desc: "Експертні ліцензійні блоки підготовки для ножичних та стрілових веж відповідно до правил держтехнагляду UDT.", udt_f1: "Ножичні підйомники", udt_f2: "Ковшові підйомники",
+                c_w4_title: "Курс Зварювання MAG 135", c_w4_desc: "Зварювальні процеси MAG за стандартами промислової напівавтоматичної зварювання.", c_w4_mat1: "Чорна сталь", w_levels_p: "Рівень 1, Рівень 2, Рівень 3", c_w4_mat2: "Нержавіюча сталь",
+                c_w5_title: "Курс Зварювання MIG 131", c_w5_desc: "Зварювальні процеси MIG в захисному середовищі інертних газів.", c_w5_mat1: "Алюміній",
+                c_w6_title: "Курс Зварювання TIG 141", c_w6_desc: "Високоточна обробка металів аргонодуговим зварюванням.", c_w6_mat1: "Чорна сталь", c_w6_mat2: "Нержавіюча сталь", c_w6_mat3: "Алюміній",
+                fa_tag: "Долікарська Допомога", fa_title: "Курси Першої Допомоги для Працівників", fa_desc: "Практичний тренінг за стандартами Європейської ради реанімації. Орієнтований на відпрацювання сценаріїв нещасних випадків безпосередньо на робочих місцях.", fa_btn: "Записатися на Першу Допомогу",
+                fire_tag: "Протипожежний Контроль", fire_title: "Пожежна Безпека для Працівників", fire_desc: "Програма повністю відповідає трудовому кодексу для осіб, відповідальних за евакуацію та гасіння пожеж. Практика включає роботу з газовим симулятором вогню.", fire_btn: "Записатися на Пожежну Безпеку",
+                dates_tag: "Графік Занять", dates_title: "Найближчі Вільні Дати", month_july: "Липень", t_row1: "Зварювання TIG (141) - Всі Рівні", t_w1_row: "Навантажувачі (Стандартний оператор)", t_row3: "Оператор Підйомників (Ліцензія UDT)", status_open: "Реєстрація відкрита", btn_table_book: "Записатися",
+                prices_title: "Вартість Навчання", comp_title: "Порівняння та Деталі Курсів", comp_sub: "Ознайомтеся з тривалістю занять, типом сертифікатів та терміном дії ліцензій.", th1: "Тип навчання", th2: "Вартість", th3: "Тип сертифіката", th4: "Термін дії ліцензії", row1_c1: "Зварювальні курси (MIG/TIG/MAG)", row1_c3: "Книжка зварника, Сертифікат Інституту Зварювання", row1_c4: "3 роки (з можливістю продовження)", row2_c1: "Обладнання UDT (Навантажувачі / Вишки)", row2_c3: "Державне посвідчення UDT", row2_c4: "від 5 до 10 років",
+                back_to_main: "Повернутися на головну", sub_status_h: "Статус реєстрації", sub_status_p: "Реєстрація на найближчий календарний блок занять офіційно відкрита.",
+                faq_tag: "Центр Допомоги", faq_title: "База знань FAQ", faq_q1: "Чи потрібен попередній досвід перед курсом зварювання?", faq_a1: "Абсолютно ні! Наші програми TIG та MIG розраховані на новачків. Понад 80% навчання — це безпосередня практика з інженерами зварювання IWE.", faq_q2: "Як виглядає державний іспит UDT на вишки?", faq_a2: "Іспит складається з двох частин: теоретичного тесту на комп'ютері та практичного керування підйомником на нашому майданчику.", faq_q3: "Чи можна оплатити навчання частинами (в розстрочку)?", faq_a3: "Ні, наразі оплата частинами або розстрочка недоступні. Усі курси оплачуються повністю до початку занять.",
+                faq_q4: "Чи обов'язковий медичний огляд для курсів UDT?", faq_a4: "Так, для допуску до керування навантажувачами або підйомниками необхідно пройти медогляд та отримати висновок від лікаря.", faq_q5: "Що буде, якщо я провалю іспит UDT?", faq_a5: "Ви можете подати заявку на перескладання іспиту в найближчому відділенні UDT, повторно сплативши державне мито.",
+                bot_title: "Помічник AI ARC PRO", bot_status: "В мережі зараз", bot_welcome: "Вітаю! Я ваш віртуальний асистент. Я проаналізую ваше запитання та миттєво надам інформацію про курси, ціни, розстрочку або іспити UDT. Що ви хочете запитати?", bot_prompt_label: "Оберіть готове питання:", p_q1: "Скільки коштує курс на підйомники?", p_q2: "Чи можна платити частинами?",
+                form_section_tag: "Контакти та Запис", form_section_title: "Побудуйте свою технічну кар'єру сьогодні", form_section_desc: "Маєте питання щодо фінансування, корпоративних знижок або вільних дат? Зв'яжіться з нашою службою підтримки або заповніть форму.", c_box_phone: "Зателефонувати нам", c_box_mail: "Надіслати e-mail", c_box_gmaps: "Подивитися на карті Google Maps", c_box_hq: "Розташування бази", form_title: "Форма Реєстрації", lbl_name: "Ім'я та Прізвище / Назва компанії", lbl_phone: "Номер телефону", lbl_email: "Електронна пошта", lbl_course: "Обраний напрямок навчання", lbl_msg: "Додаткове запитання / Примітки", lbl_privacy: "Я погоджуюся на обробку моїх персональних даних для підготовки індивідуальної пропозиції центром Arc Pro Навчання.", btn_form_submit: "Надіслати заявку на навчання",
+                f_transfer_h: "БАНКІВСЬКІ РЕКВІЗИТИ", f_transfer_p: "У призначенні платежу вкажіть ім'я курсанта та тип обраного курсу. Для компаній просимо вказувати номер NIP (ІПН) у коментарях для швидкого виставлення рахунку-фактури.", f_contact_h: "КОНТАКТНИЙ ЦЕНТР", f_address_label: "Адреса навчального центру:", f_address_val: "вул. Пшемислова 42, 00-001 Варшава (Головна зварювальна база та маневровий майданчик)", f_courses_h: "ПРОГРАМИ", f_c1: "Стандартний курс навантажувачів", f_c2: "Спеціалізований курс навантажувачів", f_c3: "Мобільні підйомники (UDT)", f_mag: "Курс зварювання MAG 135", f_mig: "Курс зварювання MIG 131", f_tig: "Курс зварювання TIG 141", f_copy: "Усі права захищені.", f_privacy: "Політика конфіденційності",
+                tbl_c_h1: "Тип навчання", tbl_c_h2: "Вартість", tbl_c_h3: "Державне мито", fee_inc: "Включено у вартість", fee_none: "Без додаткових комісій", p_btn: "Записатися", sub_status_btn: "Перейти до форми запису",
+                about_tag: "ПРО НАШУ КОМПАНІЮ", about_title: "Хто ми і що нас відрізняє?", about_p1: "<strong>Arc Pro Навчання</strong> — це сучасний навчальний центр з багаторічним досвідом. Ми спеціалізуємося на підвищенні кваліфікації у технічних професіях. Нашу команду складають інженери зварювання та сертифіковані інструктори.",
+                t_tig: "Курс зварювання TIG 141 (Рівні 1-3)", t_mig: "Курс зварювання MIG 131 (Рівні 1-3)", t_mag: "Курс зварювання MAG 135 (Рівні 1-3)", p_1900: "від 1900 зл", t_w_std: "Навантажувачі (Стандартний оператор)", p_750: "750 зл", fee_udt: "+250 зл (Державний іспит UDT)", t_w_spec: "Спеціалізовані Навантажувачі", p_1100: "1100 зл", t_podesty: "Оператор мобільних підйомних платформ", p_950: "950 зл", t_pp: "Курс першої допомоги для працівників", p_350: "350 зл", t_ppoz: "Курс пожежної безпеки для працівників", p_400: "400 зл",
+                row3_c1: "Навчання працівників (Перша допомога / Пожежна безпека)", row3_c3: "Сертифікат про закінчення згідно з Трудовим кодексом", row3_c4: "Рекомендовано оновлювати кожні 2 роки",
+                opt_w_std: "Оператор навантажувачів (Стандарт)", opt_w_spec: "Оператор спеціалізованих навантажувачів", opt_podesty: "Оператор мобільних підйомників", opt_mag: "Курс зварювання MAG 135", opt_mig: "Курс зварювання MIG 131", opt_tig: "Курс зварювання TIG 141", opt_pp: "Курс першої допомоги для працівників", opt_ppoz: "Курс пожежної безпеки для працівників",
+                ph_name: "напр. Іван Коваленко", ph_phone: "напр. +48 123 456 789", ph_email: "напр. ivan.kovalenko@gmail.com", ph_msg: "Місце для ваших коментарів", ph_chat: "Введіть своє питання тут...",
+                t_mig_course: "Курс Зварювання MIG 131", t_mag_course: "Курс Зварювання MAG 135", t_tig_course: "Курс Зварювання TIG 141", t_w_std_course: "Навантажувачі (Стандартні)", t_w_spec_course: "Спеціалізовані Навантажувачі", t_podesty_course: "Підйомні Платформи (UDT)", t_ppoz_course: "Курс пожежної безпеки", t_pp_course: "Курс першої допомоги",
+                loc_waw: "База Варшава", loc_log: "Логістичний центр", loc_yard: "Тренувальний майданчик", loc_room1: "Тренінговий зал", loc_room2: "Дидактичний зал",
+                f_company: "ТОВ Arc Pro", f_address: "вул. Пшемислова 42, 00-001 Варшава", f_bank: "PKO BANK POLSKI", f_iban: "PL 49 1020 5555 0000 8888 1234 5678", f_tel: "тел. +48 500 600 700", f_copy_prefix: "&copy; 2026 Arc Pro Навчання.",
+                form_loading: "Надсилання заявки...", form_success: "Дякуємо! Вашу заявку успішно відправлено. Ми скоро зв'яжемося з вами.",
+                bot_ans_default: "Дякую за запитання! Я інтелектуальний помічник ARC PRO. Якщо ви хочете дізнатися деталі, введіть ключове слово, наприклад: ціна, розстрочка, локація, або виберіть готове питання з панелі.", bot_ans_price: "Актуальні ціни ARC PRO:<br>• Стандартні навантажувачі: 750 зл<br>• Спеціалізовані навантажувачі UDT: 1100 зл<br>• Мобільні підйомники (UDT): 950 зл<br>• Курси зварювання (MIG/MAG/TIG): від 1900 зл.<br>Запис відкритий!", bot_ans_installments: "Ні, наразі оплата частинами недоступна. Всі збори за навчання та іспити повинні бути сплачені повністю банківським переказом або готівкою перед початком курсу.", bot_ans_forklift: "Ми проводимо два окремі курси: Стандартні навантажувачі (750 зл) та Спеціалізовані навантажувачі (телескопічні) за 1100 зл.", bot_ans_weld: "Комплексне навчання MAG 135 (Чорна/Нержавіюча сталь рівні 1-3), MIG 131 (Алюміній рівні 1-3) та TIG 141 (Чорна/Нержавіюча/Алюміній рівні 1-3). Ціни від 1900 зл.",
+                modal_title: "Політика Конфіденційності", modal_p1: "Адміністратором ваших персональних даних є Arc Pro Навчання у Варшаві. Ваші дані обробляються виключно для управління заявками на навчання, контакту з клієнтами та видачі сертифікатів.", modal_p2: "Ви маєте право на доступ, зміну та видалення своїх даних з нашої бази у будь-який час. Цей сайт не використовує інвазивних cookies для маркетингових цілей, лише ті, що необхідні для правильного функціонування.", modal_close: "Я розумію і закриваю",
+                w_section_tag: "Професійний шлях", w_section_title: "Професійні курси та сертифікація", p_btn_label: "Запис",
+                chat_you: "Ви", chat_bot: "AI Асистент"
+            }
+        };
+
+        // EN & UA selectors calculation routing safely
+        function changeLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            if (dictionary[lang] && dictionary[lang]['page_title']) {
+                document.title = dictionary[lang]['page_title'];
+            }
+            
+            // Clean selection framework
+            document.querySelectorAll('.lang-btn-node').forEach(btn => {
+                btn.classList.remove('text-brand-orange', 'font-bold');
+                btn.classList.add('text-slate-400');
+            });
+            
+            if(lang === 'pl') document.querySelectorAll('.pl-btn-node').forEach(b => { b.classList.remove('text-slate-400'); b.classList.add('text-brand-orange', 'font-bold'); });
+            if(lang === 'en') document.querySelectorAll('.en-btn-node').forEach(b => { b.classList.remove('text-slate-400'); b.classList.add('text-brand-orange', 'font-bold'); });
+            if(lang === 'uk') document.querySelectorAll('.uk-btn-node').forEach(b => { b.classList.remove('text-slate-400'); b.classList.add('text-brand-orange', 'font-bold'); });
+
+            // Translate HTML Text
+            document.querySelectorAll('.data-lang').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dictionary[lang] && dictionary[lang][key]) {
+                    el.innerHTML = dictionary[lang][key];
+                }
+            });
+
+            // Translate Placeholders
+            document.querySelectorAll('.data-lang-placeholder').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dictionary[lang] && dictionary[lang][key]) {
+                    el.placeholder = dictionary[lang][key];
+                }
+            });
+
+            resetBotMessagesToLang(lang);
+        }
+
+        function getBotPromptText(num) {
+            if (num === 1) return dictionary[currentLang]['p_q1'];
+            if (num === 2) return dictionary[currentLang]['p_q2'];
+            return '';
+        }
+
+        function resetBotMessagesToLang(lang) {
+            const chatBox = document.getElementById('chat-box');
+            if(chatBox) {
+                chatBox.innerHTML = `
+                    <div class="flex justify-start">
+                        <div class="bg-brand-gray border border-slate-700 rounded-xl px-4 py-2.5 max-w-[85%] text-xs sm:text-sm shadow-inner">
+                            <span class="block text-[9px] uppercase font-bold text-brand-blue mb-1">System ARC PRO</span>
+                            ${dictionary[lang]['bot_welcome']}
+                        </div>
+                    </div>
+                `;
+            }
+        }
+    </script>
+
+    <!-- JAVASCRIPT NAVIGATION ROUTER & FORM AJAX HANDLING -->
+    <script>
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        document.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+        
+        mobileMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        function navigateToView(viewId, anchorSelector = null) {
+            mobileMenu.classList.add('hidden');
+            document.querySelectorAll('.view-container').forEach(view => view.classList.add('hidden'));
+            
+            const activeView = document.getElementById(viewId + '-view');
+            if (activeView) activeView.classList.remove('hidden');
+
+            if (anchorSelector) {
+                setTimeout(() => {
+                    const element = document.querySelector(anchorSelector);
+                    if (element) element.scrollIntoView({ behavior: 'smooth' });
+                }, 50);
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        const privacyModal = document.getElementById('privacy-modal');
+        const footerPrivacyTrigger = document.getElementById('privacy-policy-footer-trigger');
+        const closePrivacyBtn = document.getElementById('close-privacy-btn');
+        const closePrivacyBottomBtn = document.getElementById('close-privacy-bottom-btn');
+        
+        const toggleModal = (e) => { 
+            if(e) e.preventDefault(); 
+            if(privacyModal) {
+                privacyModal.classList.toggle('hidden'); 
+            } else {
+                console.warn("Brak elementu okna polityki prywatności w kodzie HTML.");
+            }
+        };
+        if(footerPrivacyTrigger) footerPrivacyTrigger.addEventListener('click', toggleModal);
+        if(closePrivacyBtn) closePrivacyBtn.addEventListener('click', toggleModal);
+        if(closePrivacyBottomBtn) closePrivacyBottomBtn.addEventListener('click', toggleModal);
+
+        function filterCoursesMultiple(types) {
+            navigateToView('main-landing', '#kursy-sekcja');
+            const cards = document.querySelectorAll('#kursy-sekcja [data-type]');
+            cards.forEach(card => {
+                if (types.includes(card.getAttribute('data-type'))) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        function filterCourses(type) {
+            navigateToView('main-landing', '#kursy-sekcja');
+            const cards = document.querySelectorAll('#kursy-sekcja [data-type]');
+            cards.forEach(card => {
+                if (type === 'all' || card.getAttribute('data-type') === type) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            document.querySelectorAll('#kursy-sekcja button[id^="filter-btn-"]').forEach(btn => {
+                btn.className = "bg-brand-gray border border-slate-700 hover:border-brand-orange text-slate-200 text-xs px-4 py-2 rounded-xl transition-all";
+            });
+            const activeBtn = document.getElementById('filter-btn-' + type);
+            if (activeBtn) {
+                activeBtn.className = "bg-gradient-to-r from-brand-orange to-amber-500 text-white font-semibold text-xs px-4 py-2 rounded-xl transition-all shadow-md";
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            changeLanguage('pl');
+        });
+    </script>
+
+    <!-- JAVASCRIPT FOR CHAT BOT -->
+    <script>
+        const chatBoxContainerElement = document.getElementById('chat-box');
+        const chatInputFieldElement = document.getElementById('chat-input');
+        
+        function triggerQuickChat(text) {
+            chatInputFieldElement.value = text;
+            handleChatSubmit(new Event('submit'));
+        }
+
+        function handleChatSubmit(e) {
+            e.preventDefault();
+            const msg = chatInputFieldElement.value.trim();
+            if(!msg) return;
+
+            appendChatMessage(dictionary[currentLang]['chat_you'], msg, true);
+            chatInputFieldElement.value = '';
+
+            setTimeout(() => {
+                const low = msg.toLowerCase();
+                let answer = dictionary[currentLang]['bot_ans_default'];
+                
+                if (low.includes('cena') || low.includes('koszt') || low.includes('cennik') || low.includes('ile kosz') || low.includes('ceny') || low.includes('price') || low.includes('cost') || low.includes('ціна') || low.includes('вартість')) {
+                    answer = dictionary[currentLang]['bot_ans_price'];
+                } else if (low.includes('rat') || low.includes('płatność') || low.includes('plac') || low.includes('installments') || low.includes('pay') || low.includes('rozstro') || low.includes('част') || low.includes('оплат')) {
+                    answer = dictionary[currentLang]['bot_ans_installments'];
+                } else if (low.includes('wozek') || low.includes('wózek') || low.includes('widłow') || low.includes('forklift') || low.includes('truck') || low.includes('навантаж') || low.includes('кар')) {
+                    answer = dictionary[currentLang]['bot_ans_forklift'];
+                } else if (low.includes('spaw') || low.includes('tig') || low.includes('mig') || low.includes('mag') || low.includes('weld') || low.includes('звар')) {
+                    answer = dictionary[currentLang]['bot_ans_weld'];
+                }
+                
+                appendChatMessage(dictionary[currentLang]['chat_bot'], answer, false);
+            }, 400);
+        }
+
+        function appendChatMessage(author, text, isUser) {
+            const wrapper = document.createElement('div');
+            wrapper.className = `flex ${isUser ? 'justify-end' : 'justify-start'} w-full mt-2`;
+            wrapper.innerHTML = `
+                <div class="${isUser ? 'bg-brand-orange text-white' : 'bg-brand-gray text-slate-200 border border-slate-700'} rounded-xl px-4 py-2.5 max-w-[85%] text-sm">
+                    <span class="block text-[9px] uppercase font-bold text-slate-400 mb-1">${author}</span>
+                    ${text}
+                </div>
+            `;
+            chatBoxContainerElement.appendChild(wrapper);
+            chatBoxContainerElement.scrollTop = chatBoxContainerElement.scrollHeight;
+        }
+
+        const enrollmentFormNode = document.getElementById('enrollment-form');
+        const formResultNode = document.getElementById('form-result');
+        enrollmentFormNode.addEventListener('submit', function(e) {
+            e.preventDefault();
+            formResultNode.innerHTML = dictionary[currentLang]['form_loading'];
+            formResultNode.className = "text-center text-sm font-semibold text-amber-500 mt-4 p-3 bg-amber-500/10 border border-amber-500/20 rounded-lg";
+            setTimeout(() => {
+                formResultNode.innerHTML = dictionary[currentLang]['form_success'];
+                formResultNode.className = "text-center text-sm font-semibold text-emerald-400 mt-4 p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-lg";
+                enrollmentFormNode.reset();
+            }, 800);
+        });
+    </script>
+</body>
+</html>
